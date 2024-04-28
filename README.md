@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://github.com/ffadhl/foodcompass/blob/main/assets/academy.png">
+</p>
+
 # FoodCompass
 
 ## About Project
@@ -36,7 +40,7 @@ sertakan link apk yang sudah di-build
 ### 1. Kloning Proyek ini ke Komputer Anda
 
 ```bash
-git clone https://github.com/ffadhl/PathWay.git
+git clone https://github.com/ffadhl/foodcompass.git
 ```
 
 atau Anda dapat menggunakan Visual Studio
