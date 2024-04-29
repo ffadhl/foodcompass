@@ -48,13 +48,6 @@ class _SplashScreenState extends State<SplashScreen> {
                     color: ColorConstant.colorWhite,
                   ),
                 ),
-            Text(
-              'By Fadhl Al-Hafizh',
-              style: TextStyleConstant.poppinsRegular.copyWith(
-                fontSize: 10,
-                color: ColorConstant.colorWhite,
-              ),
-            ),
           ],
         ),
       ),

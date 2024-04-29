@@ -22,14 +22,12 @@ class WelcomeScreenContent extends StatelessWidget {
         const Spacer(),
         Image.asset(
           imagePath,
-          width: 100,
-          height: 100,
         ),
         const Spacer(),
         Text(
           title,
           style: TextStyleConstant.poppinsSemiBold.copyWith(
-            fontSize: 18,
+            fontSize: 20,
             color: ColorConstant.colorBlack,
           ),
           textAlign: TextAlign.center,

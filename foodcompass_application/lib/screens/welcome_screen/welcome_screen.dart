@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:foodcompass_application/constants/color_constant.dart';
 import 'package:foodcompass_application/constants/image_constant.dart';
 import 'package:foodcompass_application/models/welcome_screen_model_widget.dart';
+import 'package:foodcompass_application/screens/home/home_screen.dart';
 import 'package:foodcompass_application/screens/welcome_screen/widget/welcome_screen_dot_widget.dart';
 import 'package:foodcompass_application/screens/welcome_screen/widget/welcome_screen_widget.dart';
 
@@ -22,20 +21,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     WelcomeOnBoard(
       title: 'FoodCompass',
       description:
-          'Dengan ribuan resep lezat dari seluruh dunia, kami siap membawa Anda merasakan kenikmatan kuliner tanpa batas. Ayo, mari kita mulai!',
-      imagePath: ImageConstant.orangeLogo,
+          'FoodCompass Merupakan sebuah platform daring yang memberikan akses mudah dan cepat ke berbagai resep lezat dari seluruh dunia. ',
+      imagePath: ImageConstant.welcomePage1,
     ),
     WelcomeOnBoard(
-      title: 'Temukan Resep\nyang Anda Cari!',
+      title: 'Temukan Resep Anda',
       description:
-          'Dengan fitur pencarian yang canggih, Anda dapat menemukan resep yang Anda inginkan dengan mudah. Cukup ketik kata kunci, dan kami akan menampilkannya untuk Anda.',
-      imagePath: ImageConstant.orangeLogo,
+          'Dengan ribuan resep lezat dari seluruh dunia, kami siap membawa Anda merasakan kenikmatan kuliner tanpa batas.',
+      imagePath: ImageConstant.welcomePage2,
     ),
     WelcomeOnBoard(
-      title: 'Simpan Resep\nFavorit Anda!',
+      title: 'Simpan Resep',
       description:
-          'Dengan fitur favorite, Anda dapat menyimpan resep favorit Anda dan mengaksesnya kapan saja. Cukup tekan tombol bookmark, dan resep akan tersimpan di dalam daftar favorit Anda.',
-      imagePath: ImageConstant.orangeLogo,
+          'Simpan resep favorit Anda, akses kapan saja dan Nikmati kemudahan dalam mengakses resep kesukaan Anda. ',
+      imagePath: ImageConstant.welcomePage3,
     ),
   ];
 
@@ -89,13 +88,21 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   const Spacer(),
                   SizedBox(
                     height: 60.0,
-                    width: 60,
+                    width: 60.0,
                     child: FloatingActionButton(
                       onPressed: () {
                         _pageController.nextPage(
                           duration: const Duration(milliseconds: 500),
                           curve: Curves.easeIn,
                         );
+                        if (_currentPage == _onBoard.length - 1) {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const HomeScreen(),
+                            ),
+                          );
+                        }
                       },
                       backgroundColor: ColorConstant.colorOrange,
                       shape: const CircleBorder(),
