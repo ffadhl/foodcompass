@@ -84,8 +84,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 text: 'Favorite',
               ),
               GButton(
-                icon: LineIcons.question,
-                text: 'ChatBot',
+                icon: LineIcons.userAstronaut,
+                text: 'CompassBot',
               ),
             ],
             selectedIndex: _currentIndex,

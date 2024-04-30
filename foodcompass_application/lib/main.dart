@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';
+import 'package:foodcompass_application/constants/apikeys_constant.dart';
 import 'package:foodcompass_application/screens/splash/splash_screen.dart';
 
 void main() {
+  Gemini.init(apiKey: geminiApiKey);
   runApp(const MyApp());
 }
 
