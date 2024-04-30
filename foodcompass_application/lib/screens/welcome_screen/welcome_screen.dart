@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:foodcompass_application/constants/color_constant.dart';
 import 'package:foodcompass_application/constants/image_constant.dart';
 import 'package:foodcompass_application/models/welcome_screen_model_widget.dart';
-import 'package:foodcompass_application/screens/home/home_screen.dart';
 import 'package:foodcompass_application/screens/welcome_screen/widget/welcome_screen_dot_widget.dart';
 import 'package:foodcompass_application/screens/welcome_screen/widget/welcome_screen_widget.dart';
+import 'package:foodcompass_application/widgets/bottom_navigatior_widget.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -99,7 +99,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) =>
-                                  const HomeScreen(),
+                                  const BottomNavBar(),
                             ),
                           );
                         }
