@@ -19,6 +19,10 @@ class FoodModel {
         recipes: List<Recipe>.from(json["recipes"].map((x) => Recipe.fromJson(x))),
     );
 
+  get readyInMinutes => null;
+
+  get servings => null;
+
     Map<String, dynamic> toJson() => {
         "recipes": List<dynamic>.from(recipes.map((x) => x.toJson())),
     };

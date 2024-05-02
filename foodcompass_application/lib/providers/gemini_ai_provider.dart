@@ -10,7 +10,8 @@ import 'package:image_picker/image_picker.dart';
 
 class GeminiAiProvider extends ChangeNotifier {
   final Gemini gemini = Gemini.instance;
-  List<ChatMessage> messages = [];
+  final List<ChatMessage> _messages = [];
+  List<ChatMessage> get message => _messages;
 
   ChatUser currentUser = ChatUser(
     id: "0",
@@ -25,7 +26,7 @@ class GeminiAiProvider extends ChangeNotifier {
   );
 
   void onSend(ChatMessage chatMessage) {
-    messages.insert(0, chatMessage);
+    _messages.insert(0, chatMessage);
     notifyListeners();
 
     try {
@@ -42,9 +43,9 @@ class GeminiAiProvider extends ChangeNotifier {
         images: images,
       )
           .listen((event) {
-        ChatMessage? lastMessage = messages.firstOrNull;
+        ChatMessage? lastMessage = _messages.firstOrNull;
         if (lastMessage != null && lastMessage.user == geminiUser) {
-          lastMessage = messages.removeAt(0);
+          lastMessage = _messages.removeAt(0);
           String response = event.content?.parts?.fold(
                   "",
                   (previousValue, element) =>
@@ -52,7 +53,7 @@ class GeminiAiProvider extends ChangeNotifier {
               "";
 
           lastMessage.text += response;
-          messages.insert(0, lastMessage);
+          _messages.insert(0, lastMessage);
         } else {
           String response = event.content?.parts?.fold(
                   "",
@@ -65,7 +66,7 @@ class GeminiAiProvider extends ChangeNotifier {
             text: response,
           );
 
-          messages.insert(0, message);
+          _messages.insert(0, message);
         }
         notifyListeners();
       });
@@ -98,7 +99,7 @@ class GeminiAiProvider extends ChangeNotifier {
   }
 
   void initialMessage() {
-  if (messages.isEmpty || messages.first.user != geminiUser) {
+  if (_messages.isEmpty || _messages.first.user != geminiUser) {
     ChatMessage message = ChatMessage(
       user: geminiUser,
       createdAt: DateTime.now(),
@@ -106,7 +107,7 @@ class GeminiAiProvider extends ChangeNotifier {
           "Hai! Saya CompassBot, siap membantu Anda menemukan resep makanan yang Anda inginkan. Anda bisa memulai dengan memasukkan nama makanan yang ingin Anda ketahui resepnya atau langsung mengirimkan gambar makanan.\n\nBerlaku aturan berikut:\n\n1. Masukkan nama makanan.\n2. Masukkan gambar makanan.\n\nTunggu sebentar, saya akan mencarikan resepnya untuk Anda.\n\nSelamat mencoba!",
     );
 
-    messages.insert(0, message);
+    _messages.insert(0, message);
     notifyListeners();
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:foodcompass_application/constants/apikeys_constant.dart';
 import 'package:foodcompass_application/providers/gemini_ai_provider.dart';
+import 'package:foodcompass_application/providers/home_screen_provider.dart';
 import 'package:foodcompass_application/screens/splash/splash_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +13,9 @@ void main() {
       providers: [
         ChangeNotifierProvider(
           create: ((context) => GeminiAiProvider()),
+        ),
+        ChangeNotifierProvider(
+          create: ((context) => HomeScreenProvider()),
         ),
       ],
       child: const MyApp(),

@@ -59,7 +59,7 @@ class _GeminiAiScreenState extends State<GeminiAiScreen> {
               return DashChat(
                 currentUser: geminiAiProvider.currentUser,
                 onSend: geminiAiProvider.onSend,
-                messages: geminiAiProvider.messages,
+                messages: geminiAiProvider.message,
                 inputOptions: InputOptions(
                   trailing: [
                     Container(
