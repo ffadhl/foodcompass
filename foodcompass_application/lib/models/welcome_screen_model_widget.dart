@@ -8,4 +8,6 @@ class WelcomeOnBoard {
     required this.description,
     required this.imagePath,
   });
+  
 }
+
