@@ -6,19 +6,19 @@ import 'package:foodcompass_application/models/food_model_home_screen_model.dart
 import 'package:foodcompass_application/screens/detail/detail_screen.dart';
 import 'package:line_icons/line_icons.dart';
 
-class ItemListFoodWidget extends StatefulWidget {
+class ItemListFoodMoreGridWidget extends StatefulWidget {
   final FoodModel food;
 
-  const ItemListFoodWidget({
+  const ItemListFoodMoreGridWidget({
     super.key,
     required this.food,
   });
 
   @override
-  State<ItemListFoodWidget> createState() => _ItemListFoodWidgetState();
+  State<ItemListFoodMoreGridWidget> createState() => _ItemListFoodWidgetState();
 }
 
-class _ItemListFoodWidgetState extends State<ItemListFoodWidget> {
+class _ItemListFoodWidgetState extends State<ItemListFoodMoreGridWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

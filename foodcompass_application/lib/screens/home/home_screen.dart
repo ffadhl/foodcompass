@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:foodcompass_application/constants/color_constant.dart';
 import 'package:foodcompass_application/constants/text_style_constant.dart';
 import 'package:foodcompass_application/providers/home_screen_provider.dart';
+import 'package:foodcompass_application/screens/home/more/more_screen.dart';
 import 'package:foodcompass_application/screens/home/widget/food_list_home_screen_widget.dart';
+import 'package:foodcompass_application/widgets/loading_widget.dart';
 import 'package:foodcompass_application/widgets/search_bar_global_widget.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +21,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    Provider.of<HomeScreenProvider>(context, listen: false).fetchRecipes();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<HomeScreenProvider>(context, listen: false).fetchRecipes();
+    });
     super.initState();
   }
 
@@ -50,107 +54,159 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
       ),
       body: Consumer<HomeScreenProvider>(
-          builder: (context, homeScreenProvider, _) {
-        final homeScreenProvider = Provider.of<HomeScreenProvider>(context);
-        return SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 20.0),
-                Text(
-                  'Temukan Resep \nMakanan Favoritmu',
-                  style: TextStyleConstant.poppinsSemiBold.copyWith(
-                    color: ColorConstant.colorBlack,
-                    fontSize: 20.0,
+        builder: (context, homeScreenProvider, _) {
+          return homeScreenProvider.isLoading
+              ? const Center(child: MyLoading())
+              : SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 20.0),
+                        Text(
+                          'Temukan Resep \nMakanan Favoritmu',
+                          style: TextStyleConstant.poppinsSemiBold.copyWith(
+                            color: ColorConstant.colorBlack,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                        const SizedBox(height: 20.0),
+                        const SearchBarWidget(
+                          hintText: 'Cari resep makanan',
+                        ),
+                        const SizedBox(height: 20.0),
+                        if (homeScreenProvider.breakfastRecipes == null ||
+                            homeScreenProvider.lunchRecipes == null ||
+                            homeScreenProvider.drinkRecipes == null)
+                          const Center(child: MyLoading())
+                        else
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    "Sarapan Populer",
+                                    style: TextStyleConstant.poppinsSemiBold
+                                        .copyWith(
+                                      color: ColorConstant.colorBlack,
+                                      fontSize: 16.0,
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  IconButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            MoreAllRecipesScreen(
+                                                foodList: homeScreenProvider
+                                                    .breakfastRecipes!),
+                                      ),
+                                    );
+                                  },
+                                  icon: const Icon(
+                                    LineIcons.arrowRight,
+                                    color: ColorConstant.colorOrange,
+                                    size: 22.0,
+                                  ),
+                                )
+                                ],
+                              ),
+                              const SizedBox(height: 20.0),
+                              FoodListWidget(
+                                  foodList:
+                                      homeScreenProvider.breakfastRecipes!),
+                            ],
+                          ),
+                        const SizedBox(height: 20.0),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  "Makan Siang Populer",
+                                  style: TextStyleConstant.poppinsSemiBold
+                                      .copyWith(
+                                    color: ColorConstant.colorBlack,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                const Spacer(),
+                                IconButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            MoreAllRecipesScreen(
+                                                foodList: homeScreenProvider
+                                                    .lunchRecipes!),
+                                      ),
+                                    );
+                                  },
+                                  icon: const Icon(
+                                    LineIcons.arrowRight,
+                                    color: ColorConstant.colorOrange,
+                                    size: 22.0,
+                                  ),
+                                )
+                              ],
+                            ),
+                            const SizedBox(height: 20.0),
+                            FoodListWidget(
+                                foodList: homeScreenProvider.lunchRecipes!),
+                          ],
+                        ),
+                        const SizedBox(height: 20.0),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  "Minuman Populer",
+                                  style: TextStyleConstant.poppinsSemiBold
+                                      .copyWith(
+                                    color: ColorConstant.colorBlack,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                const Spacer(),
+                                IconButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            MoreAllRecipesScreen(
+                                                foodList: homeScreenProvider
+                                                    .drinkRecipes!),
+                                      ),
+                                    );
+                                  },
+                                  icon: const Icon(
+                                    LineIcons.arrowRight,
+                                    color: ColorConstant.colorOrange,
+                                    size: 22.0,
+                                  ),
+                                )
+                              ],
+                            ),
+                            const SizedBox(height: 20.0),
+                            FoodListWidget(
+                                foodList: homeScreenProvider.drinkRecipes!),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(height: 20.0),
-                const SearchBarWidget(
-                  hintText: 'Cari resep makanan',
-                ),
-                const SizedBox(height: 20.0),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          "Sarapan Populer",
-                          style: TextStyleConstant.poppinsSemiBold.copyWith(
-                            color: ColorConstant.colorBlack,
-                            fontSize: 16.0,
-                          ),
-                        ),
-                        const Spacer(),
-                        const Icon(
-                          LineIcons.arrowRight,
-                          color: ColorConstant.colorOrange,
-                          size: 22.0,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20.0),
-                    FoodListWidget(
-                        foodList: homeScreenProvider.breakfastRecipes!),
-                  ],
-                ),
-                const SizedBox(height: 20.0),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          "Makan Siang Populer",
-                          style: TextStyleConstant.poppinsSemiBold.copyWith(
-                            color: ColorConstant.colorBlack,
-                            fontSize: 16.0,
-                          ),
-                        ),
-                        const Spacer(),
-                        const Icon(
-                          LineIcons.arrowRight,
-                          color: ColorConstant.colorOrange,
-                          size: 22.0,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20.0),
-                    FoodListWidget(foodList: homeScreenProvider.lunchRecipes!),
-                  ],
-                ),
-                const SizedBox(height: 20.0),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          "Minuman Populer",
-                          style: TextStyleConstant.poppinsSemiBold.copyWith(
-                            color: ColorConstant.colorBlack,
-                            fontSize: 16.0,
-                          ),
-                        ),
-                        const Spacer(),
-                        const Icon(
-                          LineIcons.arrowRight,
-                          color: ColorConstant.colorOrange,
-                          size: 22.0,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20.0),
-                    FoodListWidget(foodList: homeScreenProvider.drinkRecipes!),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        );
-      }),
+                );
+        },
+      ),
     );
   }
 }

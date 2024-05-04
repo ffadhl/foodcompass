@@ -1,5 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:foodcompass_application/models/food_list_homescreen.dart';
+import 'package:foodcompass_application/models/food_model_home_screen_model.dart';
 import 'package:foodcompass_application/screens/home/widget/item_food_list_home_screen_widget.dart';
 
 class FoodListWidget extends StatefulWidget {
@@ -14,6 +16,7 @@ class FoodListWidget extends StatefulWidget {
 }
 
 class _FoodListWidgetState extends State<FoodListWidget> {
+  int maxItemCount = 5;
   @override
   Widget build(
     BuildContext context,
@@ -23,7 +26,10 @@ class _FoodListWidgetState extends State<FoodListWidget> {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
-        itemCount: widget.foodList.list.length,
+        itemCount: min(
+          widget.foodList.list.length,
+          maxItemCount,
+        ),
         itemBuilder: (context, index) {
           final foodList = widget.foodList.list[index];
           return ItemListFoodWidget(food: foodList);

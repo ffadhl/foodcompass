@@ -1,4 +1,3 @@
-
 import 'package:foodcompass_application/env/env.dart';
 
 String apiKey = Env.apiKey;
