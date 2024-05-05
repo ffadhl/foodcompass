@@ -7,7 +7,7 @@ import 'package:foodcompass_application/models/detail_model.dart';
 import 'package:foodcompass_application/models/failure_model.dart';
 import 'package:foodcompass_application/screens/detail/widget/detail_list_dishtype_widget.dart';
 import 'package:foodcompass_application/screens/detail/widget/detail_list_ingredient_widget.dart';
-import 'package:foodcompass_application/services/api/get_detail_recipe.dart';
+import 'package:foodcompass_application/services/api/spoonacular_api.dart';
 import 'package:foodcompass_application/widgets/loading_widget.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -24,7 +24,7 @@ class _DetailScreenState extends State<DetailScreen> {
 
   Future<void> _getDetailRecipe() async {
     try {
-      final getInformation = GetInformation();
+      final getInformation = SpoonacularApi();
       _detailRecipeModel = await getInformation.getDetailRecipe(widget.id);
       setState(() {});
     } on FailureMessage catch (e) {
