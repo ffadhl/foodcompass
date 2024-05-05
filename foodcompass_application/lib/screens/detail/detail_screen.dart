@@ -4,9 +4,13 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:foodcompass_application/constants/color_constant.dart';
 import 'package:foodcompass_application/constants/text_style_constant.dart';
 import 'package:foodcompass_application/models/detail_model.dart';
+import 'package:foodcompass_application/models/detail_nutrition_model.dart';
+import 'package:foodcompass_application/models/detail_similar_food_model.dart';
 import 'package:foodcompass_application/models/failure_model.dart';
 import 'package:foodcompass_application/screens/detail/widget/detail_list_dishtype_widget.dart';
 import 'package:foodcompass_application/screens/detail/widget/detail_list_ingredient_widget.dart';
+import 'package:foodcompass_application/screens/detail/widget/detail_list_nutrition_widget.dart';
+import 'package:foodcompass_application/screens/detail/widget/detail_list_similar_widget.dart';
 import 'package:foodcompass_application/services/api/spoonacular_api.dart';
 import 'package:foodcompass_application/widgets/loading_widget.dart';
 import 'package:line_icons/line_icons.dart';
@@ -21,11 +25,16 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   DetailRecipeModel? _detailRecipeModel;
+  DetailNutritionModel? _detailNutritionModel;
+  SimilarFoodList? _similarFoodList;
 
   Future<void> _getDetailRecipe() async {
     try {
       final getInformation = SpoonacularApi();
       _detailRecipeModel = await getInformation.getDetailRecipe(widget.id);
+      _detailNutritionModel =
+          await getInformation.getDetailNutrition(widget.id);
+      _similarFoodList = await getInformation.getSimilarFood(widget.id);
       setState(() {});
     } on FailureMessage catch (e) {
       print(e.message);
@@ -181,7 +190,6 @@ class _DetailScreenState extends State<DetailScreen> {
                           ),
                         ),
                         const SizedBox(height: 20.0),
-                        //make serveinminutes
                         Row(
                           children: [
                             const Icon(
@@ -195,15 +203,18 @@ class _DetailScreenState extends State<DetailScreen> {
                               child: Column(
                                 children: [
                                   Text(
-                                    _detailRecipeModel!.readyInMinutes.toString(),
-                                    style: TextStyleConstant.poppinsSemiBold.copyWith(
+                                    _detailRecipeModel!.readyInMinutes
+                                        .toString(),
+                                    style: TextStyleConstant.poppinsSemiBold
+                                        .copyWith(
                                       fontSize: 20.0,
                                       color: ColorConstant.colorOrange,
                                     ),
                                   ),
                                   Text(
                                     'Minutes',
-                                    style: TextStyleConstant.poppinsRegular.copyWith(
+                                    style: TextStyleConstant.poppinsRegular
+                                        .copyWith(
                                       fontSize: 14.0,
                                       color: ColorConstant.colorBlack,
                                     ),
@@ -231,7 +242,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
                                   'Serves ${_detailRecipeModel!.servings.toString()}',
-                                  style: TextStyleConstant.poppinsRegular.copyWith(
+                                  style:
+                                      TextStyleConstant.poppinsRegular.copyWith(
                                     fontSize: 14.0,
                                     color: ColorConstant.colorGrey,
                                   ),
@@ -252,7 +264,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           ),
                         ),
                         Html(
-                          data: _detailRecipeModel!.summary ?? '',
+                          data: _detailRecipeModel!.summary ?? 'Summary not found',
                           style: {
                             'body': Style(
                               fontSize: FontSize(14.0),
@@ -262,6 +274,38 @@ class _DetailScreenState extends State<DetailScreen> {
                                   TextStyleConstant.poppinsRegular.fontFamily,
                             ),
                           },
+                        ),
+                        ExpansionTileTheme(
+                          data: ExpansionTileThemeData(
+                            iconColor: ColorConstant.colorOrange,
+                            collapsedIconColor: ColorConstant.colorOrange,
+                            tilePadding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            collapsedShape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                          child: ExpansionTile(
+                            title: Text(
+                              'Nutrition',
+                              style: TextStyleConstant.poppinsMedium.copyWith(
+                                fontSize: 14.0,
+                                color: ColorConstant.colorBlack,
+                              ),
+                            ),
+                            children: [
+                              NutritionListWidget(
+                                calories: _detailNutritionModel!.calories
+                                    .toString(),
+                                carbs: _detailNutritionModel!.carbs.toString(),
+                                fat: _detailNutritionModel!.fat.toString(),
+                                protein: _detailNutritionModel!.protein.toString(),
+                              ),
+                            ],
+                          ),
                         ),
                         const SizedBox(height: 5.0),
                         DishTypeListWidget(
@@ -306,6 +350,23 @@ class _DetailScreenState extends State<DetailScreen> {
                             ),
                           },
                         ),
+                        const SizedBox(height: 20.0),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            'Similar Recipes',
+                            style: TextStyleConstant.poppinsSemiBold.copyWith(
+                              fontSize: 18.0,
+                              color: ColorConstant.colorBlack,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 10.0),
+                        SimilarListWidget(
+                          similarFoodList:
+                              _similarFoodList ?? SimilarFoodList(list: []),
+                        ),
+                        const SizedBox(height: 20.0),
                       ],
                     ),
                   ),
