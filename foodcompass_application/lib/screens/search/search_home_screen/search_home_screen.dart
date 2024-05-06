@@ -6,26 +6,18 @@ import 'package:foodcompass_application/models/search_model.dart';
 import 'package:foodcompass_application/screens/search/widget/result_search_screen.dart';
 import 'package:foodcompass_application/services/api/spoonacular_api.dart';
 import 'package:foodcompass_application/widgets/loading_widget.dart';
-import 'package:foodcompass_application/widgets/search_bar_global_widget.dart';
 
-class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
+class SearchHomeScreen extends StatefulWidget {
+  final String searchQuery;
+  const SearchHomeScreen({super.key, required this.searchQuery});
 
   @override
-  State<SearchScreen> createState() => _SearchScreenState();
+  State<SearchHomeScreen> createState() => _SearchHomeScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _searchBar = TextEditingController();
+class _SearchHomeScreenState extends State<SearchHomeScreen> {
   List<Result> _searchResults = [];
   bool _isLoading = false;
-
-  @override
-  void dispose() {
-    _searchBar.dispose();
-    super.dispose();
-  }
 
   Future<void> _performSearch(String query) async {
     setState(() {
@@ -46,6 +38,12 @@ class _SearchScreenState extends State<SearchScreen> {
         _isLoading = false;
       });
     }
+  }
+
+  @override
+  void initState() {
+    _performSearch(widget.searchQuery);
+    super.initState();
   }
 
   @override
@@ -74,30 +72,16 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
         centerTitle: true,
       ),
-      body: Container(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            SearchBarWidget(
-              key: _formKey,
-              controller: _searchBar,
-              hintText: 'Cari resep makanan',
-              onSubmitted: (query) => _performSearch(query),
-            ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: _isLoading
-                  ? const Center(
-                      child: MyLoading(),
-                    )
-                  : _searchResults.isNotEmpty
-                      ? SearchResultWidget(results: _searchResults)
-                      : const Center(
-                          child: Text('Tidak ada hasil pencarian'),
-                        ),
-            ),
-          ],
-        ),
+      body: Expanded(
+        child: _isLoading
+            ? const Center(
+                child: MyLoading(),
+              )
+            : _searchResults.isNotEmpty
+                ? SearchResultWidget(results: _searchResults)
+                : const Center(
+                    child: Text('No results found. Please try again.'),
+                  ),
       ),
     );
   }

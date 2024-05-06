@@ -6,6 +6,7 @@ import 'package:foodcompass_application/models/detail_nutrition_model.dart';
 import 'package:foodcompass_application/models/detail_similar_food_model.dart';
 import 'package:foodcompass_application/models/failure_model.dart';
 import 'package:foodcompass_application/models/food_model_home_screen_model.dart';
+import 'package:foodcompass_application/models/search_model.dart';
 import 'package:foodcompass_application/utils/base_url_utils.dart';
 
 class SpoonacularApi {
@@ -66,6 +67,24 @@ class SpoonacularApi {
     final response = await dio.get(url);
     if (response.statusCode == 200) {
       return SimilarFoodList.fromJson(response.data);
+    } else if (response.statusCode == 401) {
+      throw FailureMessage(code: 401, message: response.data['message']);
+    } else {
+      print(response.statusCode);
+      throw FailureMessage(
+          code: response.statusCode!, message: response.statusMessage!);
+    }
+  }
+
+  Future<SearchModel> getSearch(String type, int number) async {
+    var url = BaseUrl.baseUrl +
+        "/complexSearch?query=$type&number=$number" +
+        '&apiKey=' +
+        key;
+
+    final response = await dio.get(url);
+    if (response.statusCode == 200) {
+      return SearchModel.fromJson(response.data);
     } else if (response.statusCode == 401) {
       throw FailureMessage(code: 401, message: response.data['message']);
     } else {

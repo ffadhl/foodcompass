@@ -6,6 +6,7 @@ import 'package:foodcompass_application/constants/text_style_constant.dart';
 import 'package:foodcompass_application/providers/home_screen_provider.dart';
 import 'package:foodcompass_application/screens/home/more/more_screen.dart';
 import 'package:foodcompass_application/screens/home/widget/food_list_home_screen_widget.dart';
+import 'package:foodcompass_application/screens/search/search_home_screen/search_home_screen.dart';
 import 'package:foodcompass_application/widgets/loading_widget.dart';
 import 'package:foodcompass_application/widgets/search_bar_global_widget.dart';
 import 'package:line_icons/line_icons.dart';
@@ -19,6 +20,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _searchBar = TextEditingController();
+
+  @override
+  void dispose() {
+    _searchBar.dispose();
+    super.dispose();
+  }
+
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -72,8 +82,19 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         const SizedBox(height: 20.0),
-                        const SearchBarWidget(
+                        SearchBarWidget(
+                          key: _formKey,
+                          controller: _searchBar,
                           hintText: 'Cari resep makanan',
+                          onSubmitted: (query) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    SearchHomeScreen(searchQuery: query),
+                              ),
+                            );
+                          }
                         ),
                         const SizedBox(height: 20.0),
                         if (homeScreenProvider.breakfastRecipes == null ||
@@ -96,23 +117,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   const Spacer(),
                                   IconButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            MoreAllRecipesScreen(
-                                                foodList: homeScreenProvider
-                                                    .breakfastRecipes!),
-                                      ),
-                                    );
-                                  },
-                                  icon: const Icon(
-                                    LineIcons.arrowRight,
-                                    color: ColorConstant.colorOrange,
-                                    size: 22.0,
-                                  ),
-                                )
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              MoreAllRecipesScreen(
+                                                  foodList: homeScreenProvider
+                                                      .breakfastRecipes!),
+                                        ),
+                                      );
+                                    },
+                                    icon: const Icon(
+                                      LineIcons.arrowRight,
+                                      color: ColorConstant.colorOrange,
+                                      size: 22.0,
+                                    ),
+                                  )
                                 ],
                               ),
                               const SizedBox(height: 20.0),

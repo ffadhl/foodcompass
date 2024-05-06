@@ -6,16 +6,22 @@ import 'package:line_icons/line_icons.dart';
 class SearchBarWidget extends StatelessWidget {
   final String hintText;
   final Color? fillColor;
+  final TextEditingController? controller;
+  final Function(String)? onSubmitted;
 
   const SearchBarWidget({
     super.key,
     required this.hintText,
     this.fillColor,
+    this.onSubmitted,
+    this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
+      onSubmitted: onSubmitted,
       cursorColor: ColorConstant.colorOrange,
       decoration: InputDecoration(
         hintText: hintText,
