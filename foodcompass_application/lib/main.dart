@@ -20,11 +20,11 @@ void main() {
           create: ((context) => MoreAllRecipesProvider()),
         ),
         ChangeNotifierProvider(
-          create: ((context) => GeminiAiProvider()),
-        ),
-        ChangeNotifierProvider(
           create: ((context) => SearchScreenProvider()),
         ),
+        ChangeNotifierProvider(
+          create: ((context) => GeminiAiProvider()),
+        ),    
       ],
       child: const MyApp(),
     ),

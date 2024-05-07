@@ -98,7 +98,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   _pageController.jumpToPage(index);
                 },
               );
-              if (index == 1) {
+              if (index == 0) {
+                Provider.of<SearchScreenProvider>(context, listen: false)
+                    .resetState();
+              } else if (index == 1) {
                 Provider.of<SearchScreenProvider>(context, listen: false)
                     .resetState();
               }
