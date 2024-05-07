@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:foodcompass_application/constants/color_constant.dart';
 import 'package:foodcompass_application/constants/text_style_constant.dart';
 import 'package:foodcompass_application/providers/home_screen_provider.dart';
-import 'package:foodcompass_application/screens/home/more/more_screen.dart';
-import 'package:foodcompass_application/screens/home/widget/food_list_home_screen_widget.dart';
+import 'package:foodcompass_application/screens/home/widget/breakfast_recipe_widget.dart';
+import 'package:foodcompass_application/screens/home/widget/drink_recipe_widget.dart';
+import 'package:foodcompass_application/screens/home/widget/lunch_recipe_widget.dart';
 import 'package:foodcompass_application/screens/search/search_home_screen/search_home_screen.dart';
 import 'package:foodcompass_application/widgets/loading_widget.dart';
 import 'package:foodcompass_application/widgets/search_bar_global_widget.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -120,126 +120,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             homeScreenProvider.drinkRecipes == null)
                           const Center(child: MyLoading())
                         else
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    "Sarapan Populer",
-                                    style: TextStyleConstant.poppinsSemiBold
-                                        .copyWith(
-                                      color: ColorConstant.colorBlack,
-                                      fontSize: 16.0,
-                                    ),
-                                  ),
-                                  const Spacer(),
-                                  IconButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              MoreAllRecipesScreen(
-                                                  foodList: homeScreenProvider
-                                                      .breakfastRecipes!),
-                                        ),
-                                      );
-                                    },
-                                    icon: const Icon(
-                                      LineIcons.arrowRight,
-                                      color: ColorConstant.colorOrange,
-                                      size: 22.0,
-                                    ),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(height: 20.0),
-                              FoodListWidget(
-                                  foodList:
-                                      homeScreenProvider.breakfastRecipes!),
-                            ],
-                          ),
+                          BreakfastRecipesWidget(
+                              homeScreenProvider: homeScreenProvider),
                         const SizedBox(height: 20.0),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  "Makan Siang Populer",
-                                  style: TextStyleConstant.poppinsSemiBold
-                                      .copyWith(
-                                    color: ColorConstant.colorBlack,
-                                    fontSize: 16.0,
-                                  ),
-                                ),
-                                const Spacer(),
-                                IconButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            MoreAllRecipesScreen(
-                                                foodList: homeScreenProvider
-                                                    .lunchRecipes!),
-                                      ),
-                                    );
-                                  },
-                                  icon: const Icon(
-                                    LineIcons.arrowRight,
-                                    color: ColorConstant.colorOrange,
-                                    size: 22.0,
-                                  ),
-                                )
-                              ],
-                            ),
-                            const SizedBox(height: 20.0),
-                            FoodListWidget(
-                                foodList: homeScreenProvider.lunchRecipes!),
-                          ],
-                        ),
+                        LunchRecipeWidget(
+                            homeScreenProvider: homeScreenProvider),
                         const SizedBox(height: 20.0),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  "Minuman Populer",
-                                  style: TextStyleConstant.poppinsSemiBold
-                                      .copyWith(
-                                    color: ColorConstant.colorBlack,
-                                    fontSize: 16.0,
-                                  ),
-                                ),
-                                const Spacer(),
-                                IconButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            MoreAllRecipesScreen(
-                                                foodList: homeScreenProvider
-                                                    .drinkRecipes!),
-                                      ),
-                                    );
-                                  },
-                                  icon: const Icon(
-                                    LineIcons.arrowRight,
-                                    color: ColorConstant.colorOrange,
-                                    size: 22.0,
-                                  ),
-                                )
-                              ],
-                            ),
-                            const SizedBox(height: 20.0),
-                            FoodListWidget(
-                                foodList: homeScreenProvider.drinkRecipes!),
-                          ],
-                        ),
+                        DrinkRecipeWidget(
+                            homeScreenProvider: homeScreenProvider),
                       ],
                     ),
                   ),
