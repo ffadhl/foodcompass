@@ -10,7 +10,7 @@ import 'package:foodcompass_application/models/search_model.dart';
 import 'package:foodcompass_application/utils/base_url_utils.dart';
 
 class SpoonacularApi {
-  var key = '04dbfaa4558e45968d37174a941e8877';
+  var key = 'f30a6622d5024eac90799fe19a6f97ff';
   final dio = Dio();
 
   Future<FoodList> getRecipe(String type, int number) async {

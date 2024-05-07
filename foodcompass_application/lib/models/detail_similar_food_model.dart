@@ -1,27 +1,47 @@
+import 'dart:convert';
+
+List<DetailSimilarModel> detailSimilarModelFromJson(String str) =>
+    List<DetailSimilarModel>.from(
+        json.decode(str).map((x) => DetailSimilarModel.fromJson(x)));
+
+String detailSimilarModelToJson(List<DetailSimilarModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class DetailSimilarModel {
-  final String id;
-  final String name;
-  final String imageType;
-  final String readyInMinutes;
-  final String servings;
+  int id;
+  String imageType;
+  String title;
+  int readyInMinutes;
+  int servings;
+  String sourceUrl;
 
   DetailSimilarModel({
     required this.id,
-    required this.name,
     required this.imageType,
+    required this.title,
     required this.readyInMinutes,
     required this.servings,
+    required this.sourceUrl,
   });
 
-  factory DetailSimilarModel.fromJson(json) {
-    return DetailSimilarModel(
-      id: json['id'].toString() ,
-      name: json['title'] ?? '',
-      imageType: json['imageType'] ?? '',
-      readyInMinutes: json['readyInMinutes'].toString(),
-      servings: json['servings'].toString(),
-    );
-  }
+  factory DetailSimilarModel.fromJson(Map<String, dynamic> json) =>
+      DetailSimilarModel(
+        id: json["id"],
+        imageType: json["imageType"],
+        title: json["title"],
+        readyInMinutes: json["readyInMinutes"],
+        servings: json["servings"],
+        sourceUrl: json["sourceUrl"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "imageType": imageType,
+        "title": title,
+        "readyInMinutes": readyInMinutes,
+        "servings": servings,
+        "sourceUrl": sourceUrl,
+      };
 }
 
 class SimilarFoodList {

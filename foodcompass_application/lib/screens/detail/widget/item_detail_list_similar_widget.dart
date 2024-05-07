@@ -8,6 +8,7 @@ import 'package:line_icons/line_icons.dart';
 
 class ItemListSimilarWidget extends StatefulWidget {
   final DetailSimilarModel similarFood;
+
   const ItemListSimilarWidget({
     super.key,
     required this.similarFood,
@@ -26,7 +27,7 @@ class _ItemListSimilarWidgetState extends State<ItemListSimilarWidget> {
           context,
           MaterialPageRoute(
             builder: (context) => DetailScreen(
-              id: widget.similarFood.id,
+              id: widget.similarFood.id.toString(),
             ),
           ),
         );
@@ -68,7 +69,7 @@ class _ItemListSimilarWidgetState extends State<ItemListSimilarWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.similarFood.name,
+                      widget.similarFood.title,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyleConstant.poppinsMedium
