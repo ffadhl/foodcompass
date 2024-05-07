@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:foodcompass_application/constants/color_constant.dart';
+import 'package:foodcompass_application/providers/search_screen_provider.dart';
 import 'package:foodcompass_application/screens/favorite/favorite_screen.dart';
 import 'package:foodcompass_application/screens/gemini/gemini_ai_screen.dart';
 import 'package:foodcompass_application/screens/home/home_screen.dart';
 import 'package:foodcompass_application/screens/search/search_screen.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:provider/provider.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({
@@ -90,10 +92,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
             ],
             selectedIndex: _currentIndex,
             onTabChange: (index) {
-              setState(() {
-                _currentIndex = index;
-                _pageController.jumpToPage(index);
-              });
+              setState(
+                () {
+                  _currentIndex = index;
+                  _pageController.jumpToPage(index);
+                },
+              );
+              if (index == 1) {
+                Provider.of<SearchScreenProvider>(context, listen: false)
+                    .resetState();
+              }
             },
           ),
         ),
