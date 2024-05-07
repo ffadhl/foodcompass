@@ -21,7 +21,11 @@ class SearchBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
-      onSubmitted: onSubmitted,
+      onSubmitted: onSubmitted, 
+      style: TextStyleConstant.poppinsRegular.copyWith(
+        color: ColorConstant.colorBlack,
+        fontSize: 12.0,
+      ),
       cursorColor: ColorConstant.colorOrange,
       decoration: InputDecoration(
         hintText: hintText,

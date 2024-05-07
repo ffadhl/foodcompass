@@ -87,14 +87,30 @@ class _HomeScreenState extends State<HomeScreen> {
                           controller: _searchBar,
                           hintText: 'Cari resep makanan',
                           onSubmitted: (query) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    SearchHomeScreen(searchQuery: query),
-                              ),
-                            );
-                          }
+                            if (query.isEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  backgroundColor: ColorConstant.colorOrange20,
+                                  content: Text(
+                                    'Mohon untuk di-isi form searchnya terlebih dahulu :)',
+                                    style: TextStyleConstant.poppinsRegular
+                                        .copyWith(
+                                      color: ColorConstant.colorOrange,
+                                      fontSize: 14.0,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            } else {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      SearchHomeScreen(searchQuery: query),
+                                ),
+                              );
+                            }
+                          },
                         ),
                         const SizedBox(height: 20.0),
                         if (homeScreenProvider.breakfastRecipes == null ||
