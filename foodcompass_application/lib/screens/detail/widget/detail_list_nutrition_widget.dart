@@ -4,10 +4,10 @@ import 'package:foodcompass_application/constants/text_style_constant.dart';
 import 'package:line_icons/line_icons.dart';
 
 class NutritionListWidget extends StatefulWidget {
-  final String calories;
-  final String carbs;
-  final String fat;
-  final String protein;
+  final String? calories;
+  final String? carbs;
+  final String? fat;
+  final String? protein;
   const NutritionListWidget({
     super.key,
     required this.calories,
@@ -22,11 +22,11 @@ class NutritionListWidget extends StatefulWidget {
 
 class _NutritionListWidgetState extends State<NutritionListWidget> {
   @override
-  @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 300,
       child: ListView(
+        physics: const NeverScrollableScrollPhysics(),
         children: <Widget>[
           ListTile(
             leading: Container(
@@ -49,7 +49,7 @@ class _NutritionListWidgetState extends State<NutritionListWidget> {
               ),
             ),
             trailing: Text(
-              widget.calories,
+              widget.calories ?? '-',
               style: TextStyleConstant.poppinsMedium.copyWith(
                 fontSize: 14,
                 color: ColorConstant.colorOrange,
@@ -77,7 +77,7 @@ class _NutritionListWidgetState extends State<NutritionListWidget> {
               ),
             ),
             trailing: Text(
-              widget.carbs,
+              widget.carbs ?? '-',
               style: TextStyleConstant.poppinsMedium.copyWith(
                 fontSize: 14,
                 color: ColorConstant.colorOrange,
@@ -105,7 +105,7 @@ class _NutritionListWidgetState extends State<NutritionListWidget> {
               ),
             ),
             trailing: Text(
-              widget.fat,
+              widget.fat ?? '-',
               style: TextStyleConstant.poppinsMedium.copyWith(
                 fontSize: 14,
                 color: ColorConstant.colorOrange,
@@ -133,7 +133,7 @@ class _NutritionListWidgetState extends State<NutritionListWidget> {
               ),
             ),
             trailing: Text(
-              widget.protein,
+              widget.protein ?? '-',
               style: TextStyleConstant.poppinsMedium.copyWith(
                 fontSize: 14,
                 color: ColorConstant.colorOrange,

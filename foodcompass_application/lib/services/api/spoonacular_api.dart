@@ -48,7 +48,7 @@ class SpoonacularApi {
 
   Future<DetailNutritionModel> getDetailNutrition(String id) async {
     var url = BaseUrl.baseUrl + id + BaseUrl.nutritionPath + 'apiKey=' + key;
-
+    print(url);
     final response = await dio.get(url);
     if (response.statusCode == 200) {
       return DetailNutritionModel.fromJson(response.data);

@@ -1,26 +1,18 @@
-import 'dart:convert';
-
-DetailNutritionModel detailNutritionModelFromJson(String str) =>
-    DetailNutritionModel.fromJson(json.decode(str));
-
-String detailNutritionModelToJson(DetailNutritionModel data) =>
-    json.encode(data.toJson());
-
 class DetailNutritionModel {
-  String calories;
-  String carbs;
-  String fat;
-  String protein;
-  List<Bad> bad;
-  List<Bad> good;
-  List<Flavonoid> nutrients;
-  List<Flavonoid> properties;
-  List<Flavonoid> flavonoids;
-  List<Ingredient> ingredients;
-  CaloricBreakdown caloricBreakdown;
-  WeightPerServing weightPerServing;
-  int expires;
-  bool isStale;
+  String? calories;
+  String? carbs;
+  String? fat;
+  String? protein;
+  List<Bad>? bad;
+  List<Bad>? good;
+  List<Flavonoid>? nutrients;
+  List<Flavonoid>? properties;
+  List<Flavonoid>? flavonoids;
+  List<Ingredient>? ingredients;
+  CaloricBreakdown? caloricBreakdown;
+  WeightPerServing? weightPerServing;
+  int? expires;
+  bool? isStale;
 
   DetailNutritionModel({
     required this.calories,
@@ -60,30 +52,13 @@ class DetailNutritionModel {
         expires: json["expires"],
         isStale: json["isStale"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "calories": calories,
-        "carbs": carbs,
-        "fat": fat,
-        "protein": protein,
-        "bad": List<dynamic>.from(bad.map((x) => x.toJson())),
-        "good": List<dynamic>.from(good.map((x) => x.toJson())),
-        "nutrients": List<dynamic>.from(nutrients.map((x) => x.toJson())),
-        "properties": List<dynamic>.from(properties.map((x) => x.toJson())),
-        "flavonoids": List<dynamic>.from(flavonoids.map((x) => x.toJson())),
-        "ingredients": List<dynamic>.from(ingredients.map((x) => x.toJson())),
-        "caloricBreakdown": caloricBreakdown.toJson(),
-        "weightPerServing": weightPerServing.toJson(),
-        "expires": expires,
-        "isStale": isStale,
-      };
 }
 
 class Bad {
-  String amount;
-  bool indented;
-  String title;
-  double percentOfDailyNeeds;
+  String? amount;
+  bool? indented;
+  String? title;
+  double? percentOfDailyNeeds;
 
   Bad({
     required this.amount,
@@ -108,9 +83,9 @@ class Bad {
 }
 
 class CaloricBreakdown {
-  double percentFat;
-  double percentCarbs;
-  double percentProtein;
+  double? percentFat;
+  double? percentCarbs;
+  double? percentProtein;
 
   CaloricBreakdown({
     required this.percentFat,
@@ -133,9 +108,9 @@ class CaloricBreakdown {
 }
 
 class Flavonoid {
-  String name;
-  double amount;
-  Unit unit;
+  String? name;
+  double? amount;
+  String? unit;
   double? percentOfDailyNeeds;
 
   Flavonoid({
@@ -148,32 +123,20 @@ class Flavonoid {
   factory Flavonoid.fromJson(Map<String, dynamic> json) => Flavonoid(
         name: json["name"],
         amount: json["amount"]?.toDouble(),
-        unit: unitValues.map[json["unit"]]!,
+        unit: json["unit"],
         percentOfDailyNeeds: json["percentOfDailyNeeds"]?.toDouble(),
       );
 
   Map<String, dynamic> toJson() => {
         "name": name,
         "amount": amount,
-        "unit": unitValues.reverse[unit],
+        "unit": unit,
         "percentOfDailyNeeds": percentOfDailyNeeds,
       };
 }
 
-enum Unit { EMPTY, G, IU, KCAL, MG, UNIT, UNIT_G }
-
-final unitValues = EnumValues({
-  "": Unit.EMPTY,
-  "g": Unit.G,
-  "IU": Unit.IU,
-  "kcal": Unit.KCAL,
-  "mg": Unit.MG,
-  "%": Unit.UNIT,
-  "µg": Unit.UNIT_G
-});
-
 class Ingredient {
-  String name;
+  String? name;
   double amount;
   String unit;
   int id;
@@ -195,19 +158,11 @@ class Ingredient {
         nutrients: List<Flavonoid>.from(
             json["nutrients"].map((x) => Flavonoid.fromJson(x))),
       );
-
-  Map<String, dynamic> toJson() => {
-        "name": name,
-        "amount": amount,
-        "unit": unit,
-        "id": id,
-        "nutrients": List<dynamic>.from(nutrients.map((x) => x.toJson())),
-      };
 }
 
 class WeightPerServing {
-  int amount;
-  Unit unit;
+  int? amount;
+  String? unit;
 
   WeightPerServing({
     required this.amount,
@@ -217,23 +172,6 @@ class WeightPerServing {
   factory WeightPerServing.fromJson(Map<String, dynamic> json) =>
       WeightPerServing(
         amount: json["amount"],
-        unit: unitValues.map[json["unit"]]!,
+        unit: json["unit"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "amount": amount,
-        "unit": unitValues.reverse[unit],
-      };
-}
-
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    reverseMap = map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
-  }
 }
