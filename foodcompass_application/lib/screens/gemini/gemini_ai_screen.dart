@@ -55,7 +55,6 @@ class _GeminiAiScreenState extends State<GeminiAiScreen> {
           const BackgorundGeminiAi(),
           Consumer<GeminiAiProvider>(
             builder: (context, geminiAiProvider, _) {
-              final geminiAiProvider = Provider.of<GeminiAiProvider>(context);
               return DashChat(
                 currentUser: geminiAiProvider.currentUser,
                 onSend: geminiAiProvider.onSend,

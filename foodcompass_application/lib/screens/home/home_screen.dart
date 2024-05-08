@@ -65,7 +65,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Consumer<HomeScreenProvider>(
         builder: (context, homeScreenProvider, _) {
-          final homeScreenProvider = Provider.of<HomeScreenProvider>(context);
           return homeScreenProvider.isLoading
               ? const Center(child: MyLoading())
               : SingleChildScrollView(

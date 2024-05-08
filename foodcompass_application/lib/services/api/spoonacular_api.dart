@@ -33,7 +33,6 @@ class SpoonacularApi {
 
   Future<DetailRecipeModel> getDetailRecipe(String id) async {
     var url = BaseUrl.baseUrl + id + BaseUrl.informationPath + 'apiKey=' + key;
-
     final response = await dio.get(url);
     if (response.statusCode == 200) {
       return DetailRecipeModel.fromJson(response.data);
@@ -48,7 +47,6 @@ class SpoonacularApi {
 
   Future<DetailNutritionModel> getDetailNutrition(String id) async {
     var url = BaseUrl.baseUrl + id + BaseUrl.nutritionPath + 'apiKey=' + key;
-    print(url);
     final response = await dio.get(url);
     if (response.statusCode == 200) {
       return DetailNutritionModel.fromJson(response.data);
@@ -63,7 +61,6 @@ class SpoonacularApi {
 
   Future<SimilarFoodList> getSimilarFood(String id) async {
     var url = BaseUrl.baseUrl + id + BaseUrl.similarPath + 'apiKey=' + key;
-
     final response = await dio.get(url);
     if (response.statusCode == 200) {
       return SimilarFoodList.fromJson(response.data);

@@ -31,6 +31,9 @@ class DatabaseHelper {
           id TEXT PRIMARY KEY,
           title TEXT,
           image TEXT,
+          aggregateLikes TEXT,
+          readyInMinutes TEXT,
+          servings TEXT,
           isFavorite INTEGER
         )
         ''',
