@@ -62,7 +62,7 @@ class _SearchScreenState extends State<SearchScreen> {
               SearchBarWidget(
                 key: _formKey,
                 controller: _searchBar,
-                hintText: 'Cari resep makanan',
+                hintText: 'Search for food recipes...',
                 onSubmitted: (query) {
                   if (query.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
