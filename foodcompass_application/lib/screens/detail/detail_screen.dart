@@ -40,9 +40,11 @@ class _DetailScreenState extends State<DetailScreen> {
                   servings: '',
                   isFavorite: false,
                 ));
-    setState(() {
-      _isFavorite = recipe.isFavorite;
-    });
+    setState(
+      () {
+        _isFavorite = recipe.isFavorite;
+      },
+    );
   }
 
   Future<void> _toggleFavorite() async {
@@ -146,6 +148,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   icon: const Icon(
                                     LineIcons.arrowLeft,
                                     color: ColorConstant.colorOrange,
+                                    size: 20.0,
                                   ),
                                 ),
                               ),
@@ -170,7 +173,10 @@ class _DetailScreenState extends State<DetailScreen> {
                                     _isFavorite
                                         ? Icons.favorite
                                         : Icons.favorite_border,
-                                    color: _isFavorite ? Colors.red : null,
+                                    size: 20.0,
+                                    color: _isFavorite
+                                        ? Colors.red
+                                        : ColorConstant.colorOrange,
                                   ),
                                 ),
                               ),
