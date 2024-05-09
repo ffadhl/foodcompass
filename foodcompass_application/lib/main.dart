@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:foodcompass_application/constants/apikeys_constant.dart';
 import 'package:foodcompass_application/providers/detail_screen_provider.dart';
+import 'package:foodcompass_application/providers/favorite_screen_provider.dart';
 import 'package:foodcompass_application/providers/gemini_ai_provider.dart';
 import 'package:foodcompass_application/providers/home_screen_provider.dart';
 import 'package:foodcompass_application/providers/more_recipes_screen_provider.dart';
@@ -25,6 +26,9 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: ((context) => SearchScreenProvider()),
+        ),
+        ChangeNotifierProvider(
+          create: ((context) => FavoriteScreenProvider()),
         ),
         ChangeNotifierProvider(
           create: ((context) => GeminiAiProvider()),
