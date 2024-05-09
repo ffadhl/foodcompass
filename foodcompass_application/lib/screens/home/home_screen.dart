@@ -9,6 +9,7 @@ import 'package:foodcompass_application/screens/home/widget/drink_recipe_widget.
 import 'package:foodcompass_application/screens/home/widget/lunch_recipe_widget.dart';
 import 'package:foodcompass_application/screens/search/search_home_screen/search_home_screen.dart';
 import 'package:foodcompass_application/widgets/loading_widget.dart';
+import 'package:foodcompass_application/widgets/no_data_global_widget.dart';
 import 'package:foodcompass_application/widgets/search_bar_global_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -67,70 +68,89 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, homeScreenProvider, _) {
           return homeScreenProvider.isLoading
               ? const Center(child: MyLoading())
-              : SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 20.0),
-                        Text(
-                          'Temukan Resep \nMakanan Favoritmu',
-                          style: TextStyleConstant.poppinsSemiBold.copyWith(
-                            color: ColorConstant.colorBlack,
-                            fontSize: 20.0,
-                          ),
-                        ),
-                        const SizedBox(height: 20.0),
-                        SearchBarWidget(
-                          key: _formKey,
-                          controller: _searchBar,
-                          hintText: 'Cari resep makanan',
-                          onSubmitted: (query) {
-                            if (query.isEmpty) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  backgroundColor: ColorConstant.colorOrange20,
-                                  content: Text(
-                                    'Mohon untuk di-isi form searchnya terlebih dahulu :)',
-                                    style: TextStyleConstant.poppinsRegular
-                                        .copyWith(
-                                      color: ColorConstant.colorOrange,
-                                      fontSize: 14.0,
+              : homeScreenProvider.breakfastRecipes == null ||
+                      homeScreenProvider.lunchRecipes == null ||
+                      homeScreenProvider.drinkRecipes == null
+                  ? const NoDataWidget(
+                      titleMessage: 'OOPS!',
+                      message: 'Something went wrong',
+                    )
+                  : SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 10.0),
+                            Text(
+                              'Find your \nFavorite food recipes.',
+                              style: TextStyleConstant.poppinsSemiBold.copyWith(
+                                color: ColorConstant.colorBlack,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                            const SizedBox(height: 20.0),
+                            SearchBarWidget(
+                              key: _formKey,
+                              controller: _searchBar,
+                              hintText: 'Search for food recipes.',
+                              onSubmitted: (query) {
+                                if (query.isEmpty) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      backgroundColor:
+                                          ColorConstant.colorOrange20,
+                                      content: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'OOPS! error: ',
+                                            style: TextStyleConstant
+                                                .poppinsSemiBold
+                                                .copyWith(
+                                              color: ColorConstant.colorOrange,
+                                              fontSize: 14.0,
+                                            ),
+                                          ),
+                                          Text(
+                                            'Please fill in the search form first.',
+                                            style: TextStyleConstant
+                                                .poppinsRegular
+                                                .copyWith(
+                                              color: ColorConstant.colorOrange,
+                                              fontSize: 12.0,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ),
-                              );
-                            } else {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      SearchHomeScreen(searchQuery: query),
-                                ),
-                              );
-                            }
-                            _searchBar.clear();
-                          },
+                                  );
+                                } else {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          SearchHomeScreen(searchQuery: query),
+                                    ),
+                                  );
+                                }
+                                _searchBar.clear();
+                              },
+                            ),
+                            const SizedBox(height: 20.0),
+                            BreakfastRecipesWidget(
+                                homeScreenProvider: homeScreenProvider),
+                            const SizedBox(height: 20.0),
+                            LunchRecipeWidget(
+                                homeScreenProvider: homeScreenProvider),
+                            const SizedBox(height: 20.0),
+                            DrinkRecipeWidget(
+                                homeScreenProvider: homeScreenProvider),
+                          ],
                         ),
-                        const SizedBox(height: 20.0),
-                        if (homeScreenProvider.breakfastRecipes == null ||
-                            homeScreenProvider.lunchRecipes == null ||
-                            homeScreenProvider.drinkRecipes == null)
-                          const Center(child: MyLoading())
-                        else
-                          BreakfastRecipesWidget(
-                              homeScreenProvider: homeScreenProvider),
-                        const SizedBox(height: 20.0),
-                        LunchRecipeWidget(
-                            homeScreenProvider: homeScreenProvider),
-                        const SizedBox(height: 20.0),
-                        DrinkRecipeWidget(
-                            homeScreenProvider: homeScreenProvider),
-                      ],
-                    ),
-                  ),
-                );
+                      ),
+                    );
         },
       ),
     );

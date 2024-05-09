@@ -21,19 +21,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     WelcomeOnBoard(
       title: 'FoodCompass',
       description:
-          'FoodCompass Merupakan sebuah platform daring yang memberikan akses mudah dan cepat ke berbagai resep lezat dari seluruh dunia. ',
+          'FoodCompass is an online platform that provides quick and easy access to delicious recipes from around the world.',
       imagePath: ImageConstant.welcomePage1,
     ),
     WelcomeOnBoard(
-      title: 'Temukan Resep Anda',
+      title: 'Find Your Recipe!',
       description:
-          'Dengan ribuan resep lezat dari seluruh dunia, kami siap membawa Anda merasakan kenikmatan kuliner tanpa batas.',
+          'With thousands of delicious recipes from around the world, we are ready to take you on a journey of unlimited culinary delight.',
       imagePath: ImageConstant.welcomePage2,
     ),
     WelcomeOnBoard(
-      title: 'Simpan Resep',
+      title: 'Save Your Favorite Recipes!',
       description:
-          'Simpan resep favorit Anda, akses kapan saja dan Nikmati kemudahan dalam mengakses resep kesukaan Anda. ',
+          'Save your favorite recipes, access them anytime and enjoy the convenience of accessing your favorite recipes.',
       imagePath: ImageConstant.welcomePage3,
     ),
   ];

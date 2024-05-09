@@ -98,7 +98,7 @@ class _ItemListFoodWidgetState extends State<ItemListFoodWidget> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.all(4.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -127,7 +127,7 @@ class _ItemListFoodWidgetState extends State<ItemListFoodWidget> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(4.0),
                                     child: Text(
-                                      "${widget.food.readyInMinutes} menit",
+                                      "${widget.food.readyInMinutes} minutes",
                                       style: TextStyleConstant.poppinsMedium
                                           .copyWith(
                                               color: ColorConstant.colorGrey,
@@ -153,7 +153,7 @@ class _ItemListFoodWidgetState extends State<ItemListFoodWidget> {
                               child: Padding(
                                 padding: const EdgeInsets.all(4.0),
                                 child: Text(
-                                  "${widget.food.servings} porsi",
+                                  "${widget.food.servings} serves",
                                   style: TextStyleConstant.poppinsMedium
                                       .copyWith(
                                           color: ColorConstant.colorGrey,

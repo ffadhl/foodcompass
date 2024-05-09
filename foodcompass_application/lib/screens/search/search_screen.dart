@@ -5,6 +5,7 @@ import 'package:foodcompass_application/constants/text_style_constant.dart';
 import 'package:foodcompass_application/providers/search_screen_provider.dart';
 import 'package:foodcompass_application/screens/search/widget/result_search_screen.dart';
 import 'package:foodcompass_application/widgets/loading_widget.dart';
+import 'package:foodcompass_application/widgets/no_data_global_widget.dart';
 import 'package:foodcompass_application/widgets/search_bar_global_widget.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -54,7 +55,6 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       body: Consumer<SearchScreenProvider>(
           builder: (context, searchScreenProvider, _) {
-        final searchScreenProvider = Provider.of<SearchScreenProvider>(context);
         return Container(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -93,41 +93,10 @@ class _SearchScreenState extends State<SearchScreen> {
                         ? searchScreenProvider.searchResults.isNotEmpty
                             ? SearchResultWidget(
                                 results: searchScreenProvider.searchResults)
-                            : Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Lottie.asset(
-                                      LottieConstant.searchNoResult,
-                                      width: 100,
-                                      height: 100,
-                                    ),
-                                    const SizedBox(height: 10.0),
-                                    Column(
-                                      children: [
-                                        Text(
-                                          'OOPS!',
-                                          style: TextStyleConstant
-                                              .poppinsSemiBold
-                                              .copyWith(
-                                            color: ColorConstant.colorBlack,
-                                            fontSize: 16.0,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 5.0),
-                                        Text(
-                                          'Resep yang anda cari tidak ditemukan',
-                                          style: TextStyleConstant
-                                              .poppinsRegular
-                                              .copyWith(
-                                            color: ColorConstant.colorBlack,
-                                            fontSize: 12.0,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                            : const NoDataWidget(
+                                titleMessage: 'OOPS!',
+                                message:
+                                    'The recipe you are looking for was not found',
                               )
                         : Center(
                             child: Column(
@@ -142,16 +111,15 @@ class _SearchScreenState extends State<SearchScreen> {
                                 Column(
                                   children: [
                                     Text(
-                                      'Search Information',
+                                      'Search Information:',
                                       style: TextStyleConstant.poppinsSemiBold
                                           .copyWith(
                                         color: ColorConstant.colorBlack,
                                         fontSize: 16.0,
                                       ),
                                     ),
-                                    const SizedBox(height: 5.0),
                                     Text(
-                                      'Silakan cari terlebih dahulu',
+                                      'Please search first',
                                       style: TextStyleConstant.poppinsRegular
                                           .copyWith(
                                         color: ColorConstant.colorBlack,

@@ -27,7 +27,7 @@ class _DrinkRecipeWidgetState extends State<DrinkRecipeWidget> {
         Row(
           children: [
             Text(
-              "Minuman Populer",
+              "Popular Drinks",
               style: TextStyleConstant.poppinsSemiBold.copyWith(
                 color: ColorConstant.colorBlack,
                 fontSize: 16.0,

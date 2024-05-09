@@ -27,7 +27,7 @@ class _LunchRecipeWidgetState extends State<LunchRecipeWidget> {
         Row(
           children: [
             Text(
-              "Makan Siang Populer",
+              "Popular Lunch",
               style: TextStyleConstant.poppinsSemiBold.copyWith(
                 color: ColorConstant.colorBlack,
                 fontSize: 16.0,

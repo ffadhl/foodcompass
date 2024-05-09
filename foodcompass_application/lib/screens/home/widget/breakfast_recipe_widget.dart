@@ -27,7 +27,7 @@ class _BreakfastRecipesWidgetState extends State<BreakfastRecipesWidget> {
         Row(
           children: [
             Text(
-              "Sarapan Populer",
+              "Popular Breakfast",
               style: TextStyleConstant.poppinsSemiBold.copyWith(
                 color: ColorConstant.colorBlack,
                 fontSize: 16.0,

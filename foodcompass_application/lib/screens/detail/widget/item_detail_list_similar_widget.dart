@@ -23,7 +23,7 @@ class _ItemListSimilarWidgetState extends State<ItemListSimilarWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => DetailScreen(
