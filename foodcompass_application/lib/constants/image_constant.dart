@@ -6,5 +6,6 @@ class ImageConstant{
   static String welcomePage2 = 'lib/assets/images/welcomepage_2.png';
   static String welcomePage3 = 'lib/assets/images/welcomepage_3.png';
   static String chatBotBackground = 'lib/assets/images/compassbot_background.png';
+  static String dummyFood = 'lib/assets/images/dummy_food.jpg';
   
 }
