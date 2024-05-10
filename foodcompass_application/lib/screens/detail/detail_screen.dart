@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:foodcompass_application/constants/color_constant.dart';
 import 'package:foodcompass_application/constants/text_style_constant.dart';
-import 'package:foodcompass_application/helpers/database_helper.dart';
-import 'package:foodcompass_application/models/favorite_model.dart';
 import 'package:foodcompass_application/providers/detail_screen_provider.dart';
 import 'package:foodcompass_application/screens/detail/widget/detail_list_dishtype_widget.dart';
 import 'package:foodcompass_application/screens/detail/widget/detail_list_nutrition_widget.dart';
 import 'package:foodcompass_application/screens/detail/widget/ingredient_widget.dart';
 import 'package:foodcompass_application/screens/detail/widget/no_data_widget.dart';
 import 'package:foodcompass_application/screens/detail/widget/similar_widget.dart';
+import 'package:foodcompass_application/screens/timer/timer_screen.dart';
+import 'package:foodcompass_application/widgets/button_global_widget.dart';
 import 'package:foodcompass_application/widgets/loading_widget.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
@@ -24,75 +24,16 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-  late bool _isFavorite = false;
-
-  Future<void> _loadFavoriteStatus() async {
-    List<FavoriteRecipe> favoriteRecipes =
-        await DatabaseHelper().getAllFavoriteRecipes();
-    FavoriteRecipe? recipe =
-        favoriteRecipes.firstWhere((recipe) => recipe.id == widget.id,
-            orElse: () => FavoriteRecipe(
-                  id: widget.id,
-                  title: '',
-                  image: '',
-                  aggregateLikes: '',
-                  readyInMinutes: '',
-                  servings: '',
-                  isFavorite: false,
-                ));
-    setState(
-      () {
-        _isFavorite = recipe.isFavorite;
-      },
-    );
-  }
-
-  Future<void> _toggleFavorite() async {
-    setState(
-      () {
-        _isFavorite = !_isFavorite;
-      },
-    );
-
-    FavoriteRecipe recipe = FavoriteRecipe(
-      id: widget.id,
-      title: Provider.of<DetailScreenProvider>(context, listen: false)
-              .detailRecipeModel!
-              .title ??
-          '',
-      image: Provider.of<DetailScreenProvider>(context, listen: false)
-              .detailRecipeModel!
-              .image ??
-          '',
-      aggregateLikes: Provider.of<DetailScreenProvider>(context, listen: false)
-          .detailRecipeModel!
-          .aggregateLikes
-          .toString(),
-      readyInMinutes: Provider.of<DetailScreenProvider>(context, listen: false)
-          .detailRecipeModel!
-          .readyInMinutes
-          .toString(),
-      servings: Provider.of<DetailScreenProvider>(context, listen: false)
-          .detailRecipeModel!
-          .servings
-          .toString(),
-      isFavorite: _isFavorite,
-    );
-
-    if (_isFavorite) {
-      await DatabaseHelper().addFavoriteRecipe(recipe);
-    } else {
-      await DatabaseHelper().removeFavoriteRecipe(recipe.id);
-    }
-  }
-
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<DetailScreenProvider>(context, listen: false)
           .getDetailRecipe(widget.id);
     });
-    _loadFavoriteStatus();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<DetailScreenProvider>(context, listen: false)
+          .loadFavoriteStatus(widget.id);
+    });
     super.initState();
   }
 
@@ -168,13 +109,16 @@ class _DetailScreenState extends State<DetailScreen> {
                                       ),
                                     ),
                                   ),
-                                  onPressed: _toggleFavorite,
+                                  onPressed: () {
+                                    detailScreenProvider.toggleFavorite(
+                                        widget.id, context);
+                                  },
                                   icon: Icon(
-                                    _isFavorite
+                                    detailScreenProvider.isFavorite
                                         ? Icons.favorite
                                         : Icons.favorite_border,
                                     size: 20.0,
-                                    color: _isFavorite
+                                    color: detailScreenProvider.isFavorite
                                         ? Colors.red
                                         : ColorConstant.colorOrange,
                                   ),
@@ -477,6 +421,29 @@ class _DetailScreenState extends State<DetailScreen> {
                                 const SizedBox(height: 20.0),
                                 SimilarWidget(
                                     detailScreenProvider: detailScreenProvider),
+                                Center(
+                                  child: ButtonGlobalWidget(
+                                    height: 50,
+                                    width: 250,
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => TimerScreen(
+                                            minutes: detailScreenProvider
+                                                    .detailRecipeModel!
+                                                    .readyInMinutes ??
+                                                0,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    title: 'Timer',
+                                    textColor: ColorConstant.colorWhite,
+                                    color: ColorConstant.colorOrange,
+                                  ),
+                                ),
+                                const SizedBox(height: 20.0),
                               ],
                             ),
                           ),
