@@ -17,7 +17,7 @@ class _TimerScreenState extends State<TimerScreen> {
   late int minutesLeft;
   late int secondsLeft;
   late bool isRunning;
-  late Timer timer;
+  late Timer? timer;
 
   @override
   void initState() {
@@ -29,7 +29,7 @@ class _TimerScreenState extends State<TimerScreen> {
 
   @override
   void dispose() {
-    timer.cancel();
+    timer?.cancel();
     super.dispose();
   }
 
@@ -52,7 +52,7 @@ class _TimerScreenState extends State<TimerScreen> {
 
   void toggleTimer() {
     if (isRunning) {
-      timer.cancel();
+      timer?.cancel();
     } else {
       startTimer();
     }

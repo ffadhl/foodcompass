@@ -53,53 +53,56 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
         centerTitle: true,
       ),
       body: Consumer<FavoriteScreenProvider>(
-          builder: (context, favoriteScreenProvider, _) {
-        return favoriteScreenProvider.isLoading
-            ? const Center(
-                child: MyLoading(),
-              )
-            : favoriteScreenProvider.favoriteRecipes.isEmpty
-                ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Lottie.asset(
-                          LottieConstant.favoriteScreen,
-                          width: 200,
-                          height: 200,
-                        ),
-                        const SizedBox(height: 10.0),
-                        Column(
-                          children: [
-                            Text(
-                              'OOPS!',
-                              style: TextStyleConstant.poppinsSemiBold.copyWith(
-                                color: ColorConstant.colorBlack,
-                                fontSize: 16.0,
+        builder: (context, favoriteScreenProvider, _) {
+          return favoriteScreenProvider.isLoading
+              ? const Center(
+                  child: MyLoading(),
+                )
+              : favoriteScreenProvider.favoriteRecipes.isEmpty
+                  ? Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Lottie.asset(
+                            LottieConstant.favoriteScreen,
+                            width: 200,
+                            height: 200,
+                          ),
+                          const SizedBox(height: 10.0),
+                          Column(
+                            children: [
+                              Text(
+                                'OOPS!',
+                                style:
+                                    TextStyleConstant.poppinsSemiBold.copyWith(
+                                  color: ColorConstant.colorBlack,
+                                  fontSize: 16.0,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 5.0),
-                            Text(
-                              'No Favorite Recipes Found!',
-                              style: TextStyleConstant.poppinsRegular.copyWith(
-                                color: ColorConstant.colorBlack,
-                                fontSize: 12.0,
+                              const SizedBox(height: 5.0),
+                              Text(
+                                'No Favorite Recipes Found!',
+                                style:
+                                    TextStyleConstant.poppinsRegular.copyWith(
+                                  color: ColorConstant.colorBlack,
+                                  fontSize: 12.0,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  )
-                : ListView.builder(
-                    itemCount: favoriteScreenProvider.favoriteRecipes.length,
-                    itemBuilder: (context, index) {
-                      FavoriteRecipe recipe =
-                          favoriteScreenProvider.favoriteRecipes[index];
-                      return ItemFavoriteScreenWidget(recipe: recipe);
-                    },
-                  );
-      }),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  : ListView.builder(
+                      itemCount: favoriteScreenProvider.favoriteRecipes.length,
+                      itemBuilder: (context, index) {
+                        FavoriteRecipe recipe =
+                            favoriteScreenProvider.favoriteRecipes[index];
+                        return ItemFavoriteScreenWidget(recipe: recipe);
+                      },
+                    );
+        },
+      ),
     );
   }
 }

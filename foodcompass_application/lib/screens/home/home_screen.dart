@@ -5,6 +5,7 @@ import 'package:foodcompass_application/constants/color_constant.dart';
 import 'package:foodcompass_application/constants/text_style_constant.dart';
 import 'package:foodcompass_application/providers/home_screen_provider.dart';
 import 'package:foodcompass_application/screens/home/widget/breakfast_recipe_widget.dart';
+import 'package:foodcompass_application/screens/home/widget/carousel_banner_home_screen_widget.dart';
 import 'package:foodcompass_application/screens/home/widget/drink_recipe_widget.dart';
 import 'package:foodcompass_application/screens/home/widget/lunch_recipe_widget.dart';
 import 'package:foodcompass_application/screens/search/search_home_screen/search_home_screen.dart';
@@ -138,7 +139,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 _searchBar.clear();
                               },
                             ),
-                            const SizedBox(height: 20.0),
+                            const SizedBox(height: 30.0),
+                            const HomeCarouselSlideWidget(),
+                            const SizedBox(height: 10.0),
                             BreakfastRecipesWidget(
                                 homeScreenProvider: homeScreenProvider),
                             const SizedBox(height: 20.0),

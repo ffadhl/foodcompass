@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings, avoid_print
 
 import 'package:dio/dio.dart';
+import 'package:foodcompass_application/constants/apikeys_constant.dart';
 import 'package:foodcompass_application/models/detail_model.dart';
 import 'package:foodcompass_application/models/detail_nutrition_model.dart';
 import 'package:foodcompass_application/models/detail_similar_food_model.dart';
@@ -10,7 +11,7 @@ import 'package:foodcompass_application/models/search_model.dart';
 import 'package:foodcompass_application/utils/base_url_utils.dart';
 
 class SpoonacularApi {
-  var key = 'f629397efe344854997c03fc05b4a90a';
+  var key = apiKey;
   final dio = Dio();
 
   Future<FoodList> getRecipe(String type, int number) async {
@@ -39,7 +40,7 @@ class SpoonacularApi {
     try {
       var url =
           BaseUrl.baseUrl + id + BaseUrl.informationPath + 'apiKey=' + key;
-          print(url);
+      print(url);
       final response = await dio.get(url);
       if (response.statusCode == 200) {
         return DetailRecipeModel.fromJson(response.data);

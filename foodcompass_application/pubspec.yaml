@@ -61,6 +61,7 @@ dependencies:
   flutter_html: ^3.0.0-beta.2
   path: ^1.9.0
   flutter_ringtone_player: ^4.0.0+2
+  carousel_slider: ^4.2.1
 
 
 dev_dependencies:
