@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:foodcompass_application/constants/color_constant.dart';
+import 'package:foodcompass_application/constants/image_constant.dart';
 import 'package:foodcompass_application/constants/text_style_constant.dart';
 import 'package:foodcompass_application/models/detail_model.dart';
 
@@ -42,6 +43,11 @@ class _ItemIngredientListWidgetState extends State<ItemIngredientListWidget> {
               fit: BoxFit.cover,
               height: 100.0,
               width: 100.0,
+              errorWidget: (context, url, error) => Image.asset(
+                ImageConstant.dummyFood,
+                height: 100.0,
+                fit: BoxFit.cover,
+              ),
             ),
             const SizedBox(height: 10.0),
             Padding(

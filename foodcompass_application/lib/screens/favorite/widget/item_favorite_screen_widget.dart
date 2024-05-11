@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:foodcompass_application/constants/color_constant.dart';
+import 'package:foodcompass_application/constants/image_constant.dart';
 import 'package:foodcompass_application/constants/text_style_constant.dart';
 import 'package:foodcompass_application/models/favorite_model.dart';
 import 'package:foodcompass_application/screens/detail/detail_screen.dart';
@@ -63,6 +64,11 @@ class _ItemFavoriteScreenWidgetState extends State<ItemFavoriteScreenWidget> {
                 height: 100.0,
                 width: 100.0,
                 fit: BoxFit.cover,
+                errorWidget: (context, url, error) => Image.asset(
+                  ImageConstant.dummyFood,
+                  height: 100.0,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             Expanded(

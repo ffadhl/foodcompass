@@ -55,11 +55,11 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       body: Consumer<SearchScreenProvider>(
           builder: (context, searchScreenProvider, _) {
-        return Container(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              SearchBarWidget(
+        return Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: SearchBarWidget(
                 key: _formKey,
                 controller: _searchBar,
                 hintText: 'Search for food recipes...',
@@ -83,57 +83,57 @@ class _SearchScreenState extends State<SearchScreen> {
                   }
                 },
               ),
-              const SizedBox(height: 20),
-              Expanded(
-                child: searchScreenProvider.isLoading
-                    ? const Center(
-                        child: MyLoading(),
-                      )
-                    : searchScreenProvider.isSearched
-                        ? searchScreenProvider.searchResults.isNotEmpty
-                            ? SearchResultWidget(
-                                results: searchScreenProvider.searchResults)
-                            : const NoDataWidget(
-                                titleMessage: 'OOPS!',
-                                message:
-                                    'The recipe you are looking for was not found',
-                              )
-                        : Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Lottie.asset(
-                                  LottieConstant.searchScreen,
-                                  width: 200,
-                                  height: 200,
-                                ),
-                                const SizedBox(height: 10.0),
-                                Column(
-                                  children: [
-                                    Text(
-                                      'Search Information:',
-                                      style: TextStyleConstant.poppinsSemiBold
-                                          .copyWith(
-                                        color: ColorConstant.colorBlack,
-                                        fontSize: 16.0,
-                                      ),
+            ),
+            const SizedBox(height: 20),
+            Expanded(
+              child: searchScreenProvider.isLoading
+                  ? const Center(
+                      child: MyLoading(),
+                    )
+                  : searchScreenProvider.isSearched
+                      ? searchScreenProvider.searchResults.isNotEmpty
+                          ? SearchResultWidget(
+                              results: searchScreenProvider.searchResults)
+                          : const NoDataWidget(
+                              titleMessage: 'OOPS!',
+                              message:
+                                  'The recipe you are looking for was not found',
+                            )
+                      : Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Lottie.asset(
+                                LottieConstant.searchScreen,
+                                width: 200,
+                                height: 200,
+                              ),
+                              const SizedBox(height: 10.0),
+                              Column(
+                                children: [
+                                  Text(
+                                    'Search Information:',
+                                    style: TextStyleConstant.poppinsSemiBold
+                                        .copyWith(
+                                      color: ColorConstant.colorBlack,
+                                      fontSize: 16.0,
                                     ),
-                                    Text(
-                                      'Please search first',
-                                      style: TextStyleConstant.poppinsRegular
-                                          .copyWith(
-                                        color: ColorConstant.colorBlack,
-                                        fontSize: 12.0,
-                                      ),
+                                  ),
+                                  Text(
+                                    'Please search first',
+                                    style: TextStyleConstant.poppinsRegular
+                                        .copyWith(
+                                      color: ColorConstant.colorBlack,
+                                      fontSize: 12.0,
                                     ),
-                                  ],
-                                ),
-                              ],
-                            ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-              ),
-            ],
-          ),
+                        ),
+            ),
+          ],
         );
       }),
     );

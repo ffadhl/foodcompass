@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:foodcompass_application/constants/color_constant.dart';
+import 'package:foodcompass_application/constants/image_constant.dart';
 import 'package:foodcompass_application/constants/text_style_constant.dart';
 import 'package:foodcompass_application/models/detail_similar_food_model.dart';
 import 'package:foodcompass_application/screens/detail/detail_screen.dart';
@@ -61,6 +62,11 @@ class _ItemListSimilarWidgetState extends State<ItemListSimilarWidget> {
                       "https://img.spoonacular.com/recipes/${widget.similarFood.id}-312x231.${widget.similarFood.imageType}",
                   height: 150.0,
                   fit: BoxFit.cover,
+                  errorWidget: (context, url, error) => Image.asset(
+                    ImageConstant.dummyFood,
+                    height: 150.0,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               Padding(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:foodcompass_application/constants/image_constant.dart';
-import 'package:foodcompass_application/screens/home/widget/banner_dot_home_screen_widget.dart';
-import 'package:foodcompass_application/screens/home/widget/item_banner_home_screen_widget.dart';
+import 'package:foodcompass_application/screens/home/banner/banner_dot_home_screen_widget.dart';
+import 'package:foodcompass_application/screens/home/banner/item_banner_home_screen_widget.dart';
 
 class HomeCarouselSlideWidget extends StatefulWidget {
   const HomeCarouselSlideWidget({super.key});

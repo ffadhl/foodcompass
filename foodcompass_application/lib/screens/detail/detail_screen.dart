@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:foodcompass_application/constants/color_constant.dart';
+import 'package:foodcompass_application/constants/image_constant.dart';
 import 'package:foodcompass_application/constants/text_style_constant.dart';
 import 'package:foodcompass_application/providers/detail_screen_provider.dart';
 import 'package:foodcompass_application/screens/detail/widget/detail_list_dishtype_widget.dart';
@@ -63,8 +64,13 @@ class _DetailScreenState extends State<DetailScreen> {
                                       ? detailScreenProvider
                                           .detailRecipeModel!.image
                                           .toString()
-                                      : 'Tidak ada data tersedia',
+                                      : 'No data available',
                                   fit: BoxFit.cover,
+                                  errorWidget: (context, url, error) =>
+                                      Image.asset(
+                                    ImageConstant.dummyFood,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                               Positioned(
@@ -155,7 +161,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                   .detailRecipeModel!
                                                   .aggregateLikes
                                                   .toString()
-                                              : 'Tidak ada data tersedia',
+                                              : 'No data available',
                                           style: TextStyleConstant
                                               .poppinsSemiBold
                                               .copyWith(
@@ -211,7 +217,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                         ? detailScreenProvider
                                             .detailRecipeModel!.title
                                             .toString()
-                                        : 'Tidak ada data tersedia',
+                                        : 'No data available',
                                     style: TextStyleConstant.poppinsSemiBold
                                         .copyWith(
                                       fontSize: 25.0,
@@ -241,7 +247,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                                     .detailRecipeModel!
                                                     .readyInMinutes
                                                     .toString()
-                                                : 'Tidak ada data tersedia',
+                                                : 'No data available',
                                             style: TextStyleConstant
                                                 .poppinsSemiBold
                                                 .copyWith(
@@ -313,7 +319,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                       ? detailScreenProvider
                                           .detailRecipeModel!.summary
                                           .toString()
-                                      : 'Tidak ada data tersedia',
+                                      : 'No data available',
                                   style: {
                                     'body': Style(
                                       fontSize: FontSize(14.0),
@@ -405,7 +411,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                           ? detailScreenProvider
                                               .detailRecipeModel!.instructions
                                               .toString()
-                                          : 'Tidak ada instruksi tersedia',
+                                          : 'No data available',
                                       style: {
                                         'body': Style(
                                           fontSize: FontSize(14.0),
