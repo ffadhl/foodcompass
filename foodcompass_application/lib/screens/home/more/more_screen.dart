@@ -53,26 +53,27 @@ class _MoreAllRecipesScreenState extends State<MoreAllRecipesScreen> {
         centerTitle: true,
       ),
       body: Consumer<MoreAllRecipesProvider>(
-          builder: (context, moreAllRecipesProvider, _) {
-        return moreAllRecipesProvider.isLoading
-            ? const Center(
-                child: MyLoading(),
-              )
-            : GridView.builder(
-                shrinkWrap: true,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.7,
-                ),
-                itemCount: widget.foodList.list.length,
-                itemBuilder: (context, index) {
-                  final food = widget.foodList.list[index];
-                  return ItemListFoodMoreGridWidget(
-                    food: food,
-                  );
-                },
-              );
-      }),
+        builder: (context, moreAllRecipesProvider, _) {
+          return moreAllRecipesProvider.isLoading
+              ? const Center(
+                  child: MyLoading(),
+                )
+              : GridView.builder(
+                  shrinkWrap: true,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.7,
+                  ),
+                  itemCount: widget.foodList.list.length,
+                  itemBuilder: (context, index) {
+                    final food = widget.foodList.list[index];
+                    return ItemListFoodMoreGridWidget(
+                      food: food,
+                    );
+                  },
+                );
+        },
+      ),
     );
   }
 }

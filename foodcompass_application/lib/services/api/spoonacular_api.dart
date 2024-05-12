@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings, avoid_print
 
 import 'package:dio/dio.dart';
-import 'package:foodcompass_application/constants/apikeys_constant.dart';
 import 'package:foodcompass_application/models/detail_model.dart';
 import 'package:foodcompass_application/models/detail_nutrition_model.dart';
 import 'package:foodcompass_application/models/detail_similar_food_model.dart';
@@ -11,7 +10,7 @@ import 'package:foodcompass_application/models/search_model.dart';
 import 'package:foodcompass_application/utils/base_url_utils.dart';
 
 class SpoonacularApi {
-  var key = apiKey;
+  var key = 'f629397efe344854997c03fc05b4a90a';
   final dio = Dio();
 
   Future<FoodList> getRecipe(String type, int number) async {
@@ -20,6 +19,25 @@ class SpoonacularApi {
           "/random?number=$number&tags=$type" +
           '&apiKey=' +
           key;
+
+      final response = await dio.get(url);
+      if (response.statusCode == 200) {
+        return FoodList.fromJson(response.data['recipes']);
+      } else if (response.statusCode == 401) {
+        throw FailureMessage(code: 401, message: response.data['message']);
+      } else {
+        throw FailureMessage(
+            code: response.statusCode!, message: response.statusMessage!);
+      }
+    } catch (e) {
+      print('Error fetching recipe: $e');
+      throw FailureMessage(code: 500, message: 'Something went wrong');
+    }
+  }
+
+  Future<FoodList> getRandom(int number) async {
+    try {
+      var url = BaseUrl.baseUrl + "/random?number=$number" + '&apiKey=' + key;
 
       final response = await dio.get(url);
       if (response.statusCode == 200) {

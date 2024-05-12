@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:foodcompass_application/constants/color_constant.dart';
-import 'package:foodcompass_application/constants/lottie_animation_constant.dart';
 import 'package:foodcompass_application/constants/text_style_constant.dart';
+import 'package:foodcompass_application/models/failure_model.dart';
+import 'package:foodcompass_application/models/food_model.dart';
 import 'package:foodcompass_application/providers/search_screen_provider.dart';
+import 'package:foodcompass_application/screens/home/more/widget/item_food_list_more_grid.dart';
 import 'package:foodcompass_application/screens/search/widget/result_search_screen.dart';
+import 'package:foodcompass_application/services/api/spoonacular_api.dart';
 import 'package:foodcompass_application/widgets/loading_widget.dart';
 import 'package:foodcompass_application/widgets/no_data_global_widget.dart';
 import 'package:foodcompass_application/widgets/search_bar_global_widget.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -20,11 +22,32 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _searchBar = TextEditingController();
+  FoodList? _randomRecipes;
 
   @override
   void dispose() {
     _searchBar.dispose();
     super.dispose();
+  }
+
+  Future<void> _fetchRandomRecipes() async {
+    final spoonacularApi = SpoonacularApi();
+    try {
+      _randomRecipes ??= await spoonacularApi.getRandom(25);
+      setState(() {
+        _randomRecipes = _randomRecipes;
+      });
+    } on FailureMessage catch (e) {
+      print(e.message);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  @override
+  void initState() {
+    _fetchRandomRecipes();
+    super.initState();
   }
 
   @override
@@ -99,38 +122,21 @@ class _SearchScreenState extends State<SearchScreen> {
                               message:
                                   'The recipe you are looking for was not found',
                             )
-                      : Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Lottie.asset(
-                                LottieConstant.searchScreen,
-                                width: 200,
-                                height: 200,
-                              ),
-                              const SizedBox(height: 10.0),
-                              Column(
-                                children: [
-                                  Text(
-                                    'Search Information:',
-                                    style: TextStyleConstant.poppinsSemiBold
-                                        .copyWith(
-                                      color: ColorConstant.colorBlack,
-                                      fontSize: 16.0,
-                                    ),
-                                  ),
-                                  Text(
-                                    'Please search first',
-                                    style: TextStyleConstant.poppinsRegular
-                                        .copyWith(
-                                      color: ColorConstant.colorBlack,
-                                      fontSize: 12.0,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                      : // use gridview.builder
+                      GridView.builder(
+                          shrinkWrap: true,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 0.7,
                           ),
+                          itemCount: _randomRecipes?.list.length ?? 0,
+                          itemBuilder: (context, index) {
+                            final randomFood = _randomRecipes!.list[index];
+                            return ItemListFoodMoreGridWidget(
+                              food: randomFood,
+                            );
+                          },
                         ),
             ),
           ],
