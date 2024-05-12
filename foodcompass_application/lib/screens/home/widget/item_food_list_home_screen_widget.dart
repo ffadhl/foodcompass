@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:foodcompass_application/constants/color_constant.dart';
 import 'package:foodcompass_application/constants/image_constant.dart';
 import 'package:foodcompass_application/constants/text_style_constant.dart';
-import 'package:foodcompass_application/models/food_model_home_screen_model.dart';
+import 'package:foodcompass_application/models/food_model.dart';
 import 'package:foodcompass_application/screens/detail/detail_screen.dart';
 import 'package:line_icons/line_icons.dart';
 

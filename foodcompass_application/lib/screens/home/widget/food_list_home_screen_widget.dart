@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:foodcompass_application/models/food_model_home_screen_model.dart';
+import 'package:foodcompass_application/models/food_model.dart';
 import 'package:foodcompass_application/screens/home/widget/item_food_list_home_screen_widget.dart';
 
 class FoodListWidget extends StatefulWidget {

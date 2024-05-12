@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodcompass_application/constants/color_constant.dart';
 import 'package:foodcompass_application/constants/text_style_constant.dart';
-import 'package:foodcompass_application/models/food_model_home_screen_model.dart';
+import 'package:foodcompass_application/models/food_model.dart';
 import 'package:foodcompass_application/providers/more_recipes_screen_provider.dart';
 import 'package:foodcompass_application/screens/home/more/widget/item_food_list_more_grid.dart';
 import 'package:foodcompass_application/widgets/loading_widget.dart';

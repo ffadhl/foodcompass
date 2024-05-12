@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:foodcompass_application/models/failure_model.dart';
-import 'package:foodcompass_application/models/food_model_home_screen_model.dart';
+import 'package:foodcompass_application/models/food_model.dart';
 import 'package:foodcompass_application/models/search_model.dart';
 import 'package:foodcompass_application/services/api/spoonacular_api.dart';
 

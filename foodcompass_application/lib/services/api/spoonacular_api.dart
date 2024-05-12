@@ -6,7 +6,7 @@ import 'package:foodcompass_application/models/detail_model.dart';
 import 'package:foodcompass_application/models/detail_nutrition_model.dart';
 import 'package:foodcompass_application/models/detail_similar_food_model.dart';
 import 'package:foodcompass_application/models/failure_model.dart';
-import 'package:foodcompass_application/models/food_model_home_screen_model.dart';
+import 'package:foodcompass_application/models/food_model.dart';
 import 'package:foodcompass_application/models/search_model.dart';
 import 'package:foodcompass_application/utils/base_url_utils.dart';
 
