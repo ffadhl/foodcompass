@@ -4,8 +4,10 @@ import 'package:foodcompass_application/constants/color_constant.dart';
 import 'package:foodcompass_application/constants/image_constant.dart';
 import 'package:foodcompass_application/constants/text_style_constant.dart';
 import 'package:foodcompass_application/models/favorite_model.dart';
+import 'package:foodcompass_application/providers/favorite_screen_provider.dart';
 import 'package:foodcompass_application/screens/detail/detail_screen.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:provider/provider.dart';
 
 class ItemFavoriteScreenWidget extends StatefulWidget {
   const ItemFavoriteScreenWidget({
@@ -32,7 +34,9 @@ class _ItemFavoriteScreenWidgetState extends State<ItemFavoriteScreenWidget> {
               id: widget.recipe.id,
             ),
           ),
-        );
+        ).then((value) =>
+            Provider.of<FavoriteScreenProvider>(context, listen: false)
+                .fetchFavoriteRecipes());
       },
       child: Container(
         height: 100.0,
