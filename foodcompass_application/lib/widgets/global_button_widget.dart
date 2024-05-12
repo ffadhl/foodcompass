@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodcompass_application/constants/color_constant.dart';
 import 'package:foodcompass_application/constants/text_style_constant.dart';
 
-class ButtonGlobalWidget extends StatelessWidget {
+class GlobalButtonWidget extends StatelessWidget {
   final String title;
   final int height;
   final int width;
@@ -12,7 +12,7 @@ class ButtonGlobalWidget extends StatelessWidget {
   final Color? borderColor;
   final Function()? onTap;
 
-  const ButtonGlobalWidget({
+  const GlobalButtonWidget({
     super.key,
     required this.title,
     required this.textColor,

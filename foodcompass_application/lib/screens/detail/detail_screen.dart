@@ -7,12 +7,12 @@ import 'package:foodcompass_application/constants/text_style_constant.dart';
 import 'package:foodcompass_application/providers/detail_screen_provider.dart';
 import 'package:foodcompass_application/screens/detail/widget/detail_list_dishtype_widget.dart';
 import 'package:foodcompass_application/screens/detail/widget/detail_list_nutrition_widget.dart';
-import 'package:foodcompass_application/screens/detail/widget/ingredient_widget.dart';
-import 'package:foodcompass_application/screens/detail/widget/no_data_widget.dart';
-import 'package:foodcompass_application/screens/detail/widget/similar_widget.dart';
+import 'package:foodcompass_application/screens/detail/content/ingredient_widget.dart';
+import 'package:foodcompass_application/screens/detail/content/similar_widget.dart';
 import 'package:foodcompass_application/screens/timer/timer_screen.dart';
-import 'package:foodcompass_application/widgets/button_global_widget.dart';
-import 'package:foodcompass_application/widgets/loading_widget.dart';
+import 'package:foodcompass_application/widgets/global_button_widget.dart';
+import 'package:foodcompass_application/widgets/global_loading_widget.dart';
+import 'package:foodcompass_application/widgets/global_no_data_widget.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 
@@ -48,7 +48,10 @@ class _DetailScreenState extends State<DetailScreen> {
                   child: MyLoading(),
                 )
               : detailScreenProvider.detailRecipeModel == null
-                  ? const NoDataDetailScreen()
+                  ? const GlobalNoDataWidget(
+                      titleMessage: 'OOPS!',
+                      message: 'Something went wrong.',
+                    )
                   : SingleChildScrollView(
                       child: Column(
                         children: [
@@ -428,7 +431,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                 SimilarWidget(
                                     detailScreenProvider: detailScreenProvider),
                                 Center(
-                                  child: ButtonGlobalWidget(
+                                  child: GlobalButtonWidget(
                                     height: 50,
                                     width: 250,
                                     onTap: () {

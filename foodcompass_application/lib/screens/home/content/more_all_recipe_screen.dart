@@ -3,8 +3,8 @@ import 'package:foodcompass_application/constants/color_constant.dart';
 import 'package:foodcompass_application/constants/text_style_constant.dart';
 import 'package:foodcompass_application/models/food_model.dart';
 import 'package:foodcompass_application/providers/more_recipes_screen_provider.dart';
-import 'package:foodcompass_application/screens/home/more/widget/item_food_list_more_grid.dart';
-import 'package:foodcompass_application/widgets/loading_widget.dart';
+import 'package:foodcompass_application/widgets/global_item_food_list_grid.dart';
+import 'package:foodcompass_application/widgets/global_loading_widget.dart';
 import 'package:provider/provider.dart';
 
 class MoreAllRecipesScreen extends StatefulWidget {
@@ -67,7 +67,7 @@ class _MoreAllRecipesScreenState extends State<MoreAllRecipesScreen> {
                   itemCount: widget.foodList.list.length,
                   itemBuilder: (context, index) {
                     final food = widget.foodList.list[index];
-                    return ItemListFoodMoreGridWidget(
+                    return GlobalItemListFoodGridWidget(
                       food: food,
                     );
                   },

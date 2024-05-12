@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:foodcompass_application/constants/color_constant.dart';
 import 'package:foodcompass_application/constants/text_style_constant.dart';
 import 'package:foodcompass_application/providers/home_screen_provider.dart';
-import 'package:foodcompass_application/screens/home/content/breakfast_recipe_widget.dart';
-import 'package:foodcompass_application/screens/home/banner/carousel_banner_home_screen_widget.dart';
-import 'package:foodcompass_application/screens/home/content/drink_recipe_widget.dart';
-import 'package:foodcompass_application/screens/home/content/lunch_recipe_widget.dart';
+import 'package:foodcompass_application/screens/home/content/breakfast_recipes_widget.dart';
+import 'package:foodcompass_application/screens/home/content/banner/banner_home_screen_widget.dart';
+import 'package:foodcompass_application/screens/home/content/drink_recipes_widget.dart';
+import 'package:foodcompass_application/screens/home/content/lunch_recipes_widget.dart';
 import 'package:foodcompass_application/screens/home/content/search_home_screen_widget.dart';
-import 'package:foodcompass_application/widgets/loading_widget.dart';
-import 'package:foodcompass_application/widgets/no_data_global_widget.dart';
+import 'package:foodcompass_application/widgets/global_loading_widget.dart';
+import 'package:foodcompass_application/widgets/global_no_data_widget.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
               : homeScreenProvider.breakfastRecipes == null ||
                       homeScreenProvider.lunchRecipes == null ||
                       homeScreenProvider.drinkRecipes == null
-                  ? const NoDataWidget(
+                  ? const GlobalNoDataWidget(
                       titleMessage: 'OOPS!',
                       message: 'Something went wrong',
                     )
@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             SearchHomeScreenWidget(
                                 formKey: _formKey, searchBar: _searchBar),
                             const SizedBox(height: 30.0),
-                            const HomeCarouselSlideWidget(),
+                            const CarouselSlideHomeScreenWidget(),
                             const SizedBox(height: 10.0),
                             BreakfastRecipesWidget(
                                 homeScreenProvider: homeScreenProvider),

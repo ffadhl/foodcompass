@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class MoreAllRecipesProvider extends ChangeNotifier {
@@ -11,5 +10,4 @@ class MoreAllRecipesProvider extends ChangeNotifier {
       notifyListeners();
     });
   }
-  
 }

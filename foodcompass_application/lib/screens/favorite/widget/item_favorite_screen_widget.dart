@@ -10,12 +10,12 @@ import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 
 class ItemFavoriteScreenWidget extends StatefulWidget {
+  final FavoriteRecipe recipe;
+
   const ItemFavoriteScreenWidget({
     super.key,
     required this.recipe,
   });
-
-  final FavoriteRecipe recipe;
 
   @override
   State<ItemFavoriteScreenWidget> createState() =>

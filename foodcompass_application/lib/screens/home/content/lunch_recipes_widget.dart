@@ -2,23 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:foodcompass_application/constants/color_constant.dart';
 import 'package:foodcompass_application/constants/text_style_constant.dart';
 import 'package:foodcompass_application/providers/home_screen_provider.dart';
-import 'package:foodcompass_application/screens/home/more/more_screen.dart';
+import 'package:foodcompass_application/screens/home/content/more_all_recipe_screen.dart';
 import 'package:foodcompass_application/screens/home/widget/food_list_home_screen_widget.dart';
 import 'package:line_icons/line_icons.dart';
 
-class BreakfastRecipesWidget extends StatefulWidget {
-  const BreakfastRecipesWidget({
+class LunchRecipeWidget extends StatefulWidget {
+  final HomeScreenProvider homeScreenProvider;
+  const LunchRecipeWidget({
     super.key,
     required this.homeScreenProvider,
   });
 
-  final HomeScreenProvider homeScreenProvider;
-
   @override
-  State<BreakfastRecipesWidget> createState() => _BreakfastRecipesWidgetState();
+  State<LunchRecipeWidget> createState() => _LunchRecipeWidgetState();
 }
 
-class _BreakfastRecipesWidgetState extends State<BreakfastRecipesWidget> {
+class _LunchRecipeWidgetState extends State<LunchRecipeWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -27,7 +26,7 @@ class _BreakfastRecipesWidgetState extends State<BreakfastRecipesWidget> {
         Row(
           children: [
             Text(
-              "Popular Breakfast",
+              "Popular Lunch",
               style: TextStyleConstant.poppinsSemiBold.copyWith(
                 color: ColorConstant.colorBlack,
                 fontSize: 16.0,
@@ -40,7 +39,7 @@ class _BreakfastRecipesWidgetState extends State<BreakfastRecipesWidget> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => MoreAllRecipesScreen(
-                        foodList: widget.homeScreenProvider.breakfastRecipes!),
+                        foodList: widget.homeScreenProvider.lunchRecipes!),
                   ),
                 );
               },
@@ -53,7 +52,7 @@ class _BreakfastRecipesWidgetState extends State<BreakfastRecipesWidget> {
           ],
         ),
         const SizedBox(height: 20.0),
-        FoodListWidget(foodList: widget.homeScreenProvider.breakfastRecipes!),
+        FoodListWidget(foodList: widget.homeScreenProvider.lunchRecipes!),
       ],
     );
   }

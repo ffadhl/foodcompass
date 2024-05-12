@@ -5,7 +5,7 @@ import 'package:foodcompass_application/constants/text_style_constant.dart';
 import 'package:foodcompass_application/models/favorite_model.dart';
 import 'package:foodcompass_application/providers/favorite_screen_provider.dart';
 import 'package:foodcompass_application/screens/favorite/widget/item_favorite_screen_widget.dart';
-import 'package:foodcompass_application/widgets/loading_widget.dart';
+import 'package:foodcompass_application/widgets/global_loading_widget.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 

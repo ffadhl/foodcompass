@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:foodcompass_application/constants/color_constant.dart';
 import 'package:foodcompass_application/constants/image_constant.dart';
 import 'package:foodcompass_application/models/welcome_screen_model_widget.dart';
-import 'package:foodcompass_application/screens/welcome_screen/widget/welcome_screen_dot_widget.dart';
 import 'package:foodcompass_application/screens/welcome_screen/widget/welcome_screen_widget.dart';
-import 'package:foodcompass_application/widgets/bottom_navigatior_widget.dart';
+import 'package:foodcompass_application/screens/navigation/bottom_navigatior_widget.dart';
+import 'package:foodcompass_application/widgets/global_dot_animation_widget.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -78,11 +78,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 children: [
                   ...List.generate(
                     _onBoard.length,
-                    (index) => Padding(
-                      padding: const EdgeInsets.only(right: 4.0),
-                      child: WelcomeScreenDot(
-                        isActive: index == _currentPage,
-                      ),
+                    (index) => GlobalDotAnimationWidget(
+                      isActive: index == _currentPage,
                     ),
                   ),
                   const Spacer(),
@@ -98,8 +95,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         if (_currentPage == _onBoard.length - 1) {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  const BottomNavBar(),
+                              builder: (context) => const BottomNavBar(),
                             ),
                           );
                         }

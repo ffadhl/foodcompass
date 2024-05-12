@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:foodcompass_application/constants/color_constant.dart';
+import 'package:foodcompass_application/constants/image_constant.dart';
 import 'package:foodcompass_application/constants/text_style_constant.dart';
 import 'package:foodcompass_application/providers/search_screen_provider.dart';
-import 'package:foodcompass_application/screens/home/more/widget/item_food_list_more_grid.dart';
+import 'package:foodcompass_application/widgets/global_item_food_list_grid.dart';
 import 'package:foodcompass_application/screens/search/widget/result_search_screen.dart';
-import 'package:foodcompass_application/widgets/loading_widget.dart';
-import 'package:foodcompass_application/widgets/no_data_global_widget.dart';
-import 'package:foodcompass_application/widgets/search_bar_global_widget.dart';
+import 'package:foodcompass_application/widgets/global_loading_widget.dart';
+import 'package:foodcompass_application/widgets/global_no_data_widget.dart';
+import 'package:foodcompass_application/widgets/global_search_bar_widget.dart';
 import 'package:provider/provider.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -67,7 +68,7 @@ class _SearchScreenState extends State<SearchScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: SearchBarWidget(
+              child: GlobalSearchBarWidget(
                 key: _formKey,
                 controller: _searchBar,
                 hintText: 'Search for food recipes...',
@@ -93,6 +94,41 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
+                children: [
+                  Image.asset(
+                    ImageConstant.rhombusLogo,
+                    height: 50.0,
+                    width: 50.0,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Search',
+                          style: TextStyleConstant.poppinsSemiBold.copyWith(
+                            color: ColorConstant.colorBlack,
+                            fontSize: 16.0,
+                          ),
+                        ),
+                        Text(
+                          'Food.',
+                          style: TextStyleConstant.poppinsRegular.copyWith(
+                            color: ColorConstant.colorGrey,
+                            fontSize: 12.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
             Expanded(
               child: searchScreenProvider.isLoading
                   ? const Center(
@@ -102,7 +138,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       ? searchScreenProvider.searchResults.isNotEmpty
                           ? SearchResultWidget(
                               results: searchScreenProvider.searchResults)
-                          : const NoDataWidget(
+                          : const GlobalNoDataWidget(
                               titleMessage: 'OOPS!',
                               message:
                                   'The recipe you are looking for was not found',
@@ -120,7 +156,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           itemBuilder: (context, index) {
                             final randomFood =
                                 searchScreenProvider.randomRecipes!.list[index];
-                            return ItemListFoodMoreGridWidget(
+                            return GlobalItemListFoodGridWidget(
                               food: randomFood,
                             );
                           },

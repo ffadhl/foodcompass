@@ -10,5 +10,5 @@ class ImageConstant{
   static String dummyBanner1 = 'lib/assets/images/dummy_banner_1.png';
   static String dummyBanner2 = 'lib/assets/images/dummy_banner_2.png';
   static String dummyBanner3 = 'lib/assets/images/dummy_banner_3.png';
-  
+  static String rhombusLogo = 'lib/assets/images/ic_compassfood_rhombus.png';
 }

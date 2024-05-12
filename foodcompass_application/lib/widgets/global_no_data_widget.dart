@@ -4,10 +4,10 @@ import 'package:foodcompass_application/constants/lottie_animation_constant.dart
 import 'package:foodcompass_application/constants/text_style_constant.dart';
 import 'package:lottie/lottie.dart';
 
-class NoDataWidget extends StatelessWidget {
+class GlobalNoDataWidget extends StatelessWidget {
   final String titleMessage;
   final String message;
-  const NoDataWidget({
+  const GlobalNoDataWidget({
     super.key,
     required this.titleMessage,
     required this.message,

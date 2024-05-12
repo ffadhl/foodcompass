@@ -42,12 +42,12 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             const SizedBox(height: 20),
             Text(
-                  'FoodCompass.',
-                  style: TextStyleConstant.poppinsSemiBold.copyWith(
-                    fontSize: 24,
-                    color: ColorConstant.colorWhite,
-                  ),
-                ),
+              'FoodCompass.',
+              style: TextStyleConstant.poppinsSemiBold.copyWith(
+                fontSize: 24,
+                color: ColorConstant.colorWhite,
+              ),
+            ),
           ],
         ),
       ),

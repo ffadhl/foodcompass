@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:foodcompass_application/models/failure_model.dart';
 import 'package:foodcompass_application/models/food_model.dart';
@@ -32,7 +34,7 @@ class SearchScreenProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
-  
+
   void resetState() {
     _isLoading = false;
     _isSearched = false;
@@ -41,14 +43,19 @@ class SearchScreenProvider extends ChangeNotifier {
   }
 
   Future<void> fetchRandomRecipes() async {
-    final spoonacularApi = SpoonacularApi();
+    _isLoading = true;
+    notifyListeners();
     try {
+      final spoonacularApi = SpoonacularApi();
       _randomRecipes ??= await spoonacularApi.getRandom(25);
       notifyListeners();
     } on FailureMessage catch (e) {
       print(e.message);
     } catch (e) {
       print(e.toString());
+    } finally {
+      _isLoading = false;
+      notifyListeners();
     }
   }
 }

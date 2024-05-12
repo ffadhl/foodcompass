@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:foodcompass_application/constants/image_constant.dart';
-import 'package:foodcompass_application/screens/home/banner/banner_dot_home_screen_widget.dart';
-import 'package:foodcompass_application/screens/home/banner/item_banner_home_screen_widget.dart';
+import 'package:foodcompass_application/screens/home/content/banner/widget/item_banner_home_screen_widget.dart';
+import 'package:foodcompass_application/widgets/global_dot_animation_widget.dart';
 
-class HomeCarouselSlideWidget extends StatefulWidget {
-  const HomeCarouselSlideWidget({super.key});
+class CarouselSlideHomeScreenWidget extends StatefulWidget {
+  const CarouselSlideHomeScreenWidget({super.key});
 
   @override
-  State<HomeCarouselSlideWidget> createState() =>
+  State<CarouselSlideHomeScreenWidget> createState() =>
       _HomeCarouselSlideWidgetState();
 }
 
-class _HomeCarouselSlideWidgetState extends State<HomeCarouselSlideWidget> {
+class _HomeCarouselSlideWidgetState extends State<CarouselSlideHomeScreenWidget> {
   int _currentSlide = 0;
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class _HomeCarouselSlideWidgetState extends State<HomeCarouselSlideWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 for (int i = 0; i < 3; i++)
-                  BannerDotWidget(isActive: i == _currentSlide),
+                  GlobalDotAnimationWidget(isActive: i == _currentSlide),
               ],
             ),
           ],

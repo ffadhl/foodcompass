@@ -3,13 +3,13 @@ import 'package:foodcompass_application/constants/color_constant.dart';
 import 'package:foodcompass_application/constants/text_style_constant.dart';
 import 'package:line_icons/line_icons.dart';
 
-class SearchBarWidget extends StatelessWidget {
+class GlobalSearchBarWidget extends StatelessWidget {
   final String hintText;
   final Color? fillColor;
   final TextEditingController? controller;
   final Function(String)? onSubmitted;
 
-  const SearchBarWidget({
+  const GlobalSearchBarWidget({
     super.key,
     required this.hintText,
     this.fillColor,
@@ -21,7 +21,7 @@ class SearchBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
-      onSubmitted: onSubmitted, 
+      onSubmitted: onSubmitted,
       style: TextStyleConstant.poppinsRegular.copyWith(
         color: ColorConstant.colorBlack,
         fontSize: 12.0,

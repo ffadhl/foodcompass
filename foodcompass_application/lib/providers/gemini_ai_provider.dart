@@ -99,16 +99,16 @@ class GeminiAiProvider extends ChangeNotifier {
   }
 
   void initialMessage() {
-  if (_messages.isEmpty || _messages.first.user != geminiUser) {
-    ChatMessage message = ChatMessage(
-      user: geminiUser,
-      createdAt: DateTime.now(),
-      text:
-          "Hai! Saya CompassBot, siap membantu Anda menemukan resep makanan yang Anda inginkan. Anda bisa memulai dengan memasukkan nama makanan yang ingin Anda ketahui resepnya atau langsung mengirimkan gambar makanan.\n\nBerlaku aturan berikut:\n\n1. Masukkan nama makanan.\n2. Masukkan gambar makanan.\n\nTunggu sebentar, saya akan mencarikan resepnya untuk Anda.\n\nSelamat mencoba!",
-    );
+    if (_messages.isEmpty || _messages.first.user != geminiUser) {
+      ChatMessage message = ChatMessage(
+        user: geminiUser,
+        createdAt: DateTime.now(),
+        text:
+            "Hai! Saya CompassBot, siap membantu Anda menemukan resep makanan yang Anda inginkan. Anda bisa memulai dengan memasukkan nama makanan yang ingin Anda ketahui resepnya atau langsung mengirimkan gambar makanan.\n\nBerlaku aturan berikut:\n\n1. Masukkan nama makanan.\n2. Masukkan gambar makanan.\n\nTunggu sebentar, saya akan mencarikan resepnya untuk Anda.\n\nSelamat mencoba!",
+      );
 
-    _messages.insert(0, message);
-    notifyListeners();
+      _messages.insert(0, message);
+      notifyListeners();
+    }
   }
-}
 }

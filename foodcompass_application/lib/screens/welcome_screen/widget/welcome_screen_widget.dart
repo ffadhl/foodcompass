@@ -3,16 +3,16 @@ import 'package:foodcompass_application/constants/color_constant.dart';
 import 'package:foodcompass_application/constants/text_style_constant.dart';
 
 class WelcomeScreenContent extends StatelessWidget {
+  final String title;
+  final String description;
+  final String imagePath;
+
   const WelcomeScreenContent({
     super.key,
     required this.title,
     required this.description,
     required this.imagePath,
   });
-
-  final String title;
-  final String description;
-  final String imagePath;
 
   @override
   Widget build(BuildContext context) {

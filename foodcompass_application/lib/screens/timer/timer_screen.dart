@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:foodcompass_application/constants/color_constant.dart';
 import 'package:foodcompass_application/constants/text_style_constant.dart';
-import 'package:foodcompass_application/widgets/button_global_widget.dart';
+import 'package:foodcompass_application/widgets/global_button_widget.dart';
 
 class TimerScreen extends StatefulWidget {
   final int minutes;
@@ -100,7 +100,7 @@ class _TimerScreenState extends State<TimerScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            ButtonGlobalWidget(
+            GlobalButtonWidget(
               height: 50,
               width: 150,
               onTap: toggleTimer,

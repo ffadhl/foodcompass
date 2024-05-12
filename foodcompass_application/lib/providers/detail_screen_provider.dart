@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:foodcompass_application/helpers/database_helper.dart';
 import 'package:foodcompass_application/models/detail_model.dart';
