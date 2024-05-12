@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodcompass_application/models/failure_model.dart';
+import 'package:foodcompass_application/models/food_model.dart';
 import 'package:foodcompass_application/models/search_model.dart';
 import 'package:foodcompass_application/services/api/spoonacular_api.dart';
 
@@ -7,10 +8,12 @@ class SearchScreenProvider extends ChangeNotifier {
   List<Result> _searchResults = [];
   bool _isLoading = false;
   bool _isSearched = false;
+  FoodList? _randomRecipes;
 
   bool get isLoading => _isLoading;
   bool get isSearched => _isSearched;
   List<Result> get searchResults => _searchResults;
+  FoodList? get randomRecipes => _randomRecipes;
 
   Future<void> performSearch(String query) async {
     _isLoading = true;
@@ -29,11 +32,23 @@ class SearchScreenProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
-
+  
   void resetState() {
     _isLoading = false;
     _isSearched = false;
     _searchResults = [];
     notifyListeners();
+  }
+
+  Future<void> fetchRandomRecipes() async {
+    final spoonacularApi = SpoonacularApi();
+    try {
+      _randomRecipes ??= await spoonacularApi.getRandom(25);
+      notifyListeners();
+    } on FailureMessage catch (e) {
+      print(e.message);
+    } catch (e) {
+      print(e.toString());
+    }
   }
 }
