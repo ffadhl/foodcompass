@@ -78,7 +78,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       SnackBar(
                         backgroundColor: ColorConstant.colorOrange20,
                         content: Text(
-                          'Mohon untuk di-isi form searchnya terlebih dahulu :)',
+                          'Please fill in the search form first',
                           style: TextStyleConstant.poppinsRegular.copyWith(
                             color: ColorConstant.colorOrange,
                             fontSize: 14.0,
