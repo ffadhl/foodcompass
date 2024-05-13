@@ -10,27 +10,32 @@ class HomeScreenProvider extends ChangeNotifier {
   FoodList? _breakfastRecipes;
   FoodList? _lunchRecipes;
   FoodList? _drinkRecipes;
+  FailureMessage? _error;
+  bool _isLoading = false;
 
   FoodList? get breakfastRecipes => _breakfastRecipes;
   FoodList? get lunchRecipes => _lunchRecipes;
   FoodList? get drinkRecipes => _drinkRecipes;
-
-  bool get isLoading =>
-      _breakfastRecipes == null ||
-      _lunchRecipes == null ||
-      _drinkRecipes == null;
+  FailureMessage? get error => _error;
+  bool get isLoading => _isLoading;
 
   Future<void> fetchRecipes() async {
-    final spoonacularApi = SpoonacularApi();
+    _isLoading = true;
+    notifyListeners();
     try {
+      final spoonacularApi = SpoonacularApi();
       _breakfastRecipes ??= await spoonacularApi.getRecipe("breakfast", 20);
       _lunchRecipes ??= await spoonacularApi.getRecipe("lunch", 20);
       _drinkRecipes ??= await spoonacularApi.getRecipe("drink", 20);
       notifyListeners();
     } on FailureMessage catch (e) {
+      _error = e;
       print(e.message);
     } catch (e) {
       print(e.toString());
+    } finally {
+      _isLoading = false;
+      notifyListeners();
     }
   }
 
@@ -51,12 +56,10 @@ class HomeScreenProvider extends ChangeNotifier {
       _searchResults = searchResults.results;
       _isSearched = true;
     } on FailureMessage catch (e) {
+      _error = e;
       print(e.message);
     } catch (e) {
       print('Error performing search: $e');
-    } finally {
-      _isLoadingSearch = false;
-      notifyListeners();
     }
   }
 

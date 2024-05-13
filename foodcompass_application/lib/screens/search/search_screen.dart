@@ -143,24 +143,29 @@ class _SearchScreenState extends State<SearchScreen> {
                               message:
                                   'The recipe you are looking for was not found',
                             )
-                      : GridView.builder(
-                          shrinkWrap: true,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio: 0.7,
-                          ),
-                          itemCount:
-                              searchScreenProvider.randomRecipes?.list.length ??
+                      : searchScreenProvider.error != null
+                          ? const GlobalNoDataWidget(
+                              titleMessage: 'OOPS!',
+                              message: 'Something went wrong',
+                            )
+                          : GridView.builder(
+                              shrinkWrap: true,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                childAspectRatio: 0.7,
+                              ),
+                              itemCount: searchScreenProvider
+                                      .randomRecipes?.list.length ??
                                   0,
-                          itemBuilder: (context, index) {
-                            final randomFood =
-                                searchScreenProvider.randomRecipes!.list[index];
-                            return GlobalItemListFoodGridWidget(
-                              food: randomFood,
-                            );
-                          },
-                        ),
+                              itemBuilder: (context, index) {
+                                final randomFood = searchScreenProvider
+                                    .randomRecipes!.list[index];
+                                return GlobalItemListFoodGridWidget(
+                                  food: randomFood,
+                                );
+                              },
+                            ),
             ),
           ],
         );

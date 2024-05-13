@@ -11,11 +11,13 @@ class SearchScreenProvider extends ChangeNotifier {
   bool _isLoading = false;
   bool _isSearched = false;
   FoodList? _randomRecipes;
+  FailureMessage? _error;
 
   bool get isLoading => _isLoading;
   bool get isSearched => _isSearched;
   List<Result> get searchResults => _searchResults;
   FoodList? get randomRecipes => _randomRecipes;
+  FailureMessage? get error => _error;
 
   Future<void> performSearch(String query) async {
     _isLoading = true;
@@ -26,6 +28,7 @@ class SearchScreenProvider extends ChangeNotifier {
       _searchResults = searchResults.results;
       _isSearched = true;
     } on FailureMessage catch (e) {
+      _error = e;
       print(e.message);
     } catch (e) {
       print('Error performing search: $e');
@@ -50,6 +53,7 @@ class SearchScreenProvider extends ChangeNotifier {
       _randomRecipes ??= await spoonacularApi.getRandom(25);
       notifyListeners();
     } on FailureMessage catch (e) {
+      _error = e;
       print(e.message);
     } catch (e) {
       print(e.toString());

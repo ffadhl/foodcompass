@@ -68,45 +68,51 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, homeScreenProvider, _) {
           return homeScreenProvider.isLoading
               ? const Center(child: MyLoading())
-              : homeScreenProvider.breakfastRecipes == null ||
-                      homeScreenProvider.lunchRecipes == null ||
-                      homeScreenProvider.drinkRecipes == null
+              : homeScreenProvider.error != null
                   ? const GlobalNoDataWidget(
                       titleMessage: 'OOPS!',
                       message: 'Something went wrong',
                     )
-                  : SingleChildScrollView(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 10.0),
-                            Text(
-                              'Find your \nFavorite food recipes.',
-                              style: TextStyleConstant.poppinsSemiBold.copyWith(
-                                color: ColorConstant.colorBlack,
-                                fontSize: 20.0,
-                              ),
+                  : homeScreenProvider.breakfastRecipes == null ||
+                          homeScreenProvider.lunchRecipes == null ||
+                          homeScreenProvider.drinkRecipes == null
+                      ? const GlobalNoDataWidget(
+                          titleMessage: 'OOPS!',
+                          message: 'Something went wrong',
+                        )
+                      : SingleChildScrollView(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(height: 10.0),
+                                Text(
+                                  'Find your \nFavorite food recipes.',
+                                  style: TextStyleConstant.poppinsSemiBold
+                                      .copyWith(
+                                    color: ColorConstant.colorBlack,
+                                    fontSize: 20.0,
+                                  ),
+                                ),
+                                const SizedBox(height: 20.0),
+                                SearchHomeScreenWidget(
+                                    formKey: _formKey, searchBar: _searchBar),
+                                const SizedBox(height: 30.0),
+                                const CarouselSlideHomeScreenWidget(),
+                                const SizedBox(height: 10.0),
+                                BreakfastRecipesWidget(
+                                    homeScreenProvider: homeScreenProvider),
+                                const SizedBox(height: 20.0),
+                                LunchRecipeWidget(
+                                    homeScreenProvider: homeScreenProvider),
+                                const SizedBox(height: 20.0),
+                                DrinkRecipeWidget(
+                                    homeScreenProvider: homeScreenProvider),
+                              ],
                             ),
-                            const SizedBox(height: 20.0),
-                            SearchHomeScreenWidget(
-                                formKey: _formKey, searchBar: _searchBar),
-                            const SizedBox(height: 30.0),
-                            const CarouselSlideHomeScreenWidget(),
-                            const SizedBox(height: 10.0),
-                            BreakfastRecipesWidget(
-                                homeScreenProvider: homeScreenProvider),
-                            const SizedBox(height: 20.0),
-                            LunchRecipeWidget(
-                                homeScreenProvider: homeScreenProvider),
-                            const SizedBox(height: 20.0),
-                            DrinkRecipeWidget(
-                                homeScreenProvider: homeScreenProvider),
-                          ],
-                        ),
-                      ),
-                    );
+                          ),
+                        );
         },
       ),
     );
